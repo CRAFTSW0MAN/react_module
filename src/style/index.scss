@@ -1,0 +1,13 @@
+@import './fonts.scss';
+@import './_normalize.scss';
+:root {
+  height: 100vh;
+  width: 100vw;
+  color-scheme: light dark;
+  background-image: url(../../public/assets/images/1624070459_43-phonoteka_org-p-zvezdnie-voini-oboi-krasivo-49.jpg);
+  background-color: rgba(0, 0, 0, 0.6);
+  background-blend-mode: overlay;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

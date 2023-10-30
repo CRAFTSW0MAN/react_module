@@ -1,0 +1,47 @@
+.header {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  &_logo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: Star_Wards;
+    font-size: 2rem;
+
+    .logo_img {
+      max-width: 10rem;
+    }
+
+    .logo_name {
+      margin-left: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      line-height: 2rem;
+      color: #EBD71C;
+    }
+  }
+
+  .header_nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: Star_Wards;
+    font-size: 2rem;
+  }
+
+  .button_music{
+    border: 2px solid #EBD71C;
+    font-family: Star_Wards;
+    font-size: 2rem;
+    color: #EBD71C;
+    font-weight: bold;
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.5rem;
+  }
+
+}
