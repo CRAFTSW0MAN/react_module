@@ -5,11 +5,9 @@ import style from './_search.module.scss';
 import { IStateSearch } from '../../type/interfaces';
 export class Search extends Component<{
   upDate: (dataSearch: string) => void;
+  upDateSearch: (search: string) => void;
 }> {
   inputValueSearch = localStorage.getItem('searchQuery');
-  constructor(props: { upDate: (dataSearch: string) => void }) {
-    super(props);
-  }
   state: IStateSearch = {
     search: this.inputValueSearch ? this.inputValueSearch : '',
   };
@@ -23,6 +21,7 @@ export class Search extends Component<{
     localStorage.setItem('searchQuery', this.state.search);
     console.log(this.state.search);
     this.props.upDate(this.state.search);
+    this.props.upDateSearch(this.state.search);
   }
   private OnClickButtonDelete(): void {
     localStorage.setItem('searchQuery', '');
@@ -31,6 +30,7 @@ export class Search extends Component<{
     });
     const emptyString = '';
     this.props.upDate(emptyString);
+    this.props.upDateSearch(this.state.search);
   }
   public render(): ReactNode {
     return (

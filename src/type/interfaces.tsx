@@ -22,6 +22,7 @@ export interface IpeopleImages {
 export interface IStateMain {
   arrPeoples: IdataPeople[];
   dataSearch: string;
+  grogySpinner: boolean;
 }
 export interface IStateSearch {
   search: string;
