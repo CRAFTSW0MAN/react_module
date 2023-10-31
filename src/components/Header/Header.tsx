@@ -1,13 +1,15 @@
 import { Component, ReactNode } from 'react';
-import soundtrack from '../../../public/audio/zvezdnye-vojny-enikin-i-padme_(zzz.fm).mp3';
+import soundtrack from '/audio/zvezdnye-vojny-enikin-i-padme_(zzz.fm).mp3';
 import style from './_header.module.scss';
-import logo from '../../../public/assets/images/star-wars-logo-png-image.png';
+import Logo from '/assets/images/star-wars-logo-png-image.png';
+import ErroLogo from '/assets/images/EternalGalacticEmpireLogo.webp';
 import { HeaderState } from '../../type/type';
 
 export class Header extends Component {
   audio: HTMLAudioElement | null = null;
   state: HeaderState = {
     isPlaying: false,
+    hasError: false,
   };
 
   public componentDidMount(): void {
@@ -35,10 +37,13 @@ export class Header extends Component {
   }
 
   public render(): ReactNode {
+    if (this.state.hasError) {
+      throw new Error('Error!');
+    }
     return (
       <header className={style.header}>
         <div className={style.header_logo}>
-          <img className={style.logo_img} src={logo} alt="logo" />
+          <img className={style.logo_img} src={Logo} alt="logo" />
           <div className={style.logo_name}>
             <span className={style.name_span1}>Star Wards</span>
             <span className={style.name_span2}> Wikipedia</span>
@@ -52,6 +57,16 @@ export class Header extends Component {
           onClick={() => this.toggleMusic()}
         >
           {this.state.isPlaying ? 'Pause Music' : 'Play Music'}
+        </button>
+        <button
+          className={style.button_error}
+          onClick={() => {
+            this.setState({
+              hasError: !this.state.hasError,
+            });
+          }}
+        >
+          <img className={style.button_img} src={ErroLogo} alt="Error" />
         </button>
       </header>
     );

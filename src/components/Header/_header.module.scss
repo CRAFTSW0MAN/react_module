@@ -33,7 +33,9 @@
     font-size: 2rem;
   }
 
-  .button_music {
+  .button_music,
+  .button_error {
+    height: 5rem;
     border: 2px solid #ebd71c;
     font-family: DeathStar;
     font-size: 2rem;
@@ -43,5 +45,12 @@
     text-align: center;
     cursor: pointer;
     border-radius: 0.5rem;
+    .button_img {
+      height: 100%;
+      width: 90%;
+    }
+  }
+  .button_error {
+    background: transparent;
   }
 }

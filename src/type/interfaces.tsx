@@ -26,3 +26,6 @@ export interface IStateMain {
 export interface IStateSearch {
   search: string;
 }
+export interface IStateError {
+  hasError: boolean;
+}

@@ -1,6 +1,6 @@
 import { ChangeEvent, Component, ReactNode } from 'react';
-import SearchLogo from '../../../public/assets/images/search.png';
-import DeleteLogo from '../../../public/assets/images/delete.png';
+import SearchLogo from '/assets/images/search.png';
+import DeleteLogo from '/assets/images/delete.png';
 import style from './_search.module.scss';
 import { IStateSearch } from '../../type/interfaces';
 export class Search extends Component<{
