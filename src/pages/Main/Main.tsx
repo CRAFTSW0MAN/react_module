@@ -3,15 +3,17 @@ import { Component } from 'react';
 import { Search } from '../../components/Search/Search';
 import './_main.module.scss';
 import { CardOfPeople } from '../../components/CardOfPeople/CardOfPeople';
-import { IdataPeople } from '../../type/interfaces';
+import { IdataPeople, IStateMain } from '../../type/interfaces';
 import style from './_main.module.scss';
 export class Main extends Component {
-  state = {
+  inputValueSearch = localStorage.getItem('searchQuery');
+  state: IStateMain = {
     arrPeoples: [],
+    dataSearch: this.inputValueSearch ? this.inputValueSearch : '',
   };
 
   componentDidMount() {
-    ApiService.getAllPlanets().then((response) => {
+    ApiService.getAllPlanets(this.state.dataSearch).then((response) => {
       this.setState({
         arrPeoples: response.results,
       });

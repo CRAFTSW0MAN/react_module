@@ -19,3 +19,10 @@ export interface IdataPeople {
 export interface IpeopleImages {
   [key: string]: string;
 }
+export interface IStateMain {
+  arrPeoples: IdataPeople[];
+  dataSearch: string;
+}
+export interface IStateSearch {
+  search: string;
+}

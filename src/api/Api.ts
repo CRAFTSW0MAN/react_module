@@ -1,14 +1,15 @@
-export class ApiService {
+import { Component } from 'react';
+
+export class ApiService extends Component {
   private static baseUrl = `https://swapi.dev/api/people/`;
-  public static async getAllPlanets() {
-    const res: Response = await fetch(`${this.baseUrl}`, {
-      method: 'GET',
-      // headers: {
-      //   'Content-Type': 'application/json',
-      // },
-    });
+  public static async getAllPlanets(search: string) {
+    const res: Response = await fetch(
+      `${this.baseUrl}${search.length ? `?search=${search}` : ''}`,
+      {
+        method: 'GET',
+      }
+    );
     const json = await res.json();
-    console.log(json);
     return json;
   }
 

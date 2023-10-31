@@ -14,13 +14,17 @@ export class CardOfPeople extends Component<{ card: IdataPeople }> {
     return (
       <div className={style.card}>
         <div className={style.card_img_block}>
-        <img
-          className={style.card_img}
-          src={!!peopleImages[`${name}`]?peopleImages[`${name}`]:peopleImages['no Icon']}
-          alt={name}
-        />
+          <img
+            className={style.card_img}
+            src={
+              !!peopleImages[`${name}`]
+                ? peopleImages[`${name}`]
+                : peopleImages['no Icon']
+            }
+            alt={name}
+          />
         </div>
-      <div className={style.card_title}>{name}</div>
+        <div className={style.card_title}>{name}</div>
         <div className={style.card_height}>
           Height: <span className={style.card_span}>{height} cm</span>
         </div>
