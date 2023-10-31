@@ -4,7 +4,7 @@ import { Main } from '../pages/Main/Main';
 import style from './_app.module.scss';
 
 export class App extends Component {
-  render() {
+  public render() {
     return (
       <div className={style.container}>
         <Header />

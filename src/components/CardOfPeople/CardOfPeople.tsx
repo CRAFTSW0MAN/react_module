@@ -4,11 +4,7 @@ import { peopleImages } from '../peopleImages/peopleImages';
 import style from './_cardOfPeople.module.scss';
 
 export class CardOfPeople extends Component<{ card: IdataPeople }> {
-  constructor(props: { card: IdataPeople }) {
-    super(props);
-  }
-
-  render() {
+  public render() {
     const { name, height, mass, gender, hair_color, skin_color } =
       this.props.card;
     return (
