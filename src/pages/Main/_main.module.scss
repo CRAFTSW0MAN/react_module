@@ -5,5 +5,15 @@
     align-items: center;
     flex-wrap: wrap;
     box-sizing: border-box;
+
+    .main_empty {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-family: DeathStar;
+      font-size: 3rem;
+    }
   }
 }

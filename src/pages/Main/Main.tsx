@@ -56,13 +56,19 @@ export class Main extends Component {
           <Grogu />
         ) : (
           <div className={style.main_container}>
-            {this.state.arrPeoples.map((elem: IdataPeople, index: number) => {
-              return (
-                <div key={index}>
-                  <CardOfPeople card={elem} />
-                </div>
-              );
-            })}
+            {this.state.arrPeoples.length ? (
+              this.state.arrPeoples.map((elem: IdataPeople, index: number) => {
+                return (
+                  <div key={index}>
+                    <CardOfPeople card={elem} />
+                  </div>
+                );
+              })
+            ) : (
+              <div className={style.main_empty}>
+                Unfortunately nothing was found for your request!
+              </div>
+            )}
           </div>
         )}
       </section>

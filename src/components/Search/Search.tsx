@@ -30,7 +30,7 @@ export class Search extends Component<{
     });
     const emptyString = '';
     this.props.upDate(emptyString);
-    this.props.upDateSearch(this.state.search);
+    this.props.upDateSearch(emptyString);
   }
   public render(): ReactNode {
     return (
