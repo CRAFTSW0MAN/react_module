@@ -5,7 +5,7 @@ import './_main.module.scss';
 import { CardOfPeople } from '../../components/CardOfPeople/CardOfPeople';
 import { IdataPeople, IStateMain } from '../../type/interfaces';
 import style from './_main.module.scss';
-export class Main extends Component<IStateMain> {
+export class Main extends Component {
   inputValueSearch = localStorage.getItem('searchQuery');
   state: IStateMain = {
     arrPeoples: [],
@@ -17,7 +17,6 @@ export class Main extends Component<IStateMain> {
       this.setState({
         arrPeoples: response.results,
       });
-      console.log(this.state.arrPeoples);
     });
   }
 
@@ -27,7 +26,6 @@ export class Main extends Component<IStateMain> {
         this.setState({
           arrPeoples: response.results,
         });
-        console.log(this.state.arrPeoples);
       });
     };
     return (
