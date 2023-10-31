@@ -1,36 +1,38 @@
-import { ChangeEvent, Component } from 'react';
+import { ChangeEvent, Component, ReactNode } from 'react';
 import SearchLogo from '../../../public/assets/images/search.png';
 import DeleteLogo from '../../../public/assets/images/delete.png';
 import style from './_search.module.scss';
 import { IStateSearch } from '../../type/interfaces';
-import { ApiService } from '../../api/Api';
-export class Search extends Component {
+export class Search extends Component<{
+  upDate: (dataSearch: string) => void;
+}> {
   inputValueSearch = localStorage.getItem('searchQuery');
+  constructor(props: { upDate: (dataSearch: string) => void }) {
+    super(props);
+  }
   state: IStateSearch = {
     search: this.inputValueSearch ? this.inputValueSearch : '',
   };
 
-  OnChangeInput(e: ChangeEvent<HTMLInputElement>) {
+  private OnChangeInput(e: ChangeEvent<HTMLInputElement>): void {
     this.setState({
       search: e.target.value,
     });
   }
-  OnClickButtonSearch() {
+  private OnClickButtonSearch(): void {
     localStorage.setItem('searchQuery', this.state.search);
-    ApiService.getAllPlanets(this.state.search).then((response) => {
-      console.log(response);
-    });
+    console.log(this.state.search);
+    this.props.upDate(this.state.search);
   }
-  OnClickButtonDelete() {
+  private OnClickButtonDelete(): void {
     localStorage.setItem('searchQuery', '');
     this.setState({
       search: '',
     });
-    ApiService.getAllPlanets(this.state.search).then((response) => {
-      console.log(response);
-    });
+    const emptyString = '';
+    this.props.upDate(emptyString);
   }
-  render() {
+  public render(): ReactNode {
     return (
       <div className={style.search}>
         <input
@@ -41,6 +43,7 @@ export class Search extends Component {
             this.OnChangeInput(e);
           }}
           value={this.state.search}
+          autoFocus={true}
         />
         <button
           className={style.search_button}

@@ -2,10 +2,7 @@ import { Component, ReactNode } from 'react';
 import soundtrack from '../../../public/audio/zvezdnye-vojny-enikin-i-padme_(zzz.fm).mp3';
 import style from './_header.module.scss';
 import logo from '../../../public/assets/images/star-wars-logo-png-image.png';
-
-type HeaderState = {
-  isPlaying: boolean;
-};
+import { HeaderState } from '../../type/type';
 
 export class Header extends Component {
   audio: HTMLAudioElement | null = null;
