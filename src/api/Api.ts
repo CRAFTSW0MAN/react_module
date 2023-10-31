@@ -1,6 +1,6 @@
 export class ApiService {
   private static baseUrl = `https://swapi.dev/api/people/`;
-  public static async getAllPlanets()  {
+  public static async getAllPlanets() {
     const res: Response = await fetch(`${this.baseUrl}`, {
       method: 'GET',
       // headers: {

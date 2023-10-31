@@ -3,12 +3,13 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  box-sizing: border-box;
 
   &_logo {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    font-family: Star_Wards;
+    font-family: DeathStar;
     font-size: 2rem;
 
     .logo_img {
@@ -20,28 +21,27 @@
       display: flex;
       flex-direction: column;
       line-height: 2rem;
-      color: #EBD71C;
+      color: #ebd71c;
     }
   }
 
-  .header_nav{
+  .header_nav {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    font-family: Star_Wards;
+    font-family: DeathStar;
     font-size: 2rem;
   }
 
-  .button_music{
-    border: 2px solid #EBD71C;
-    font-family: Star_Wards;
+  .button_music {
+    border: 2px solid #ebd71c;
+    font-family: DeathStar;
     font-size: 2rem;
-    color: #EBD71C;
+    color: #ebd71c;
     font-weight: bold;
     padding: 10px 20px;
     text-align: center;
     cursor: pointer;
     border-radius: 0.5rem;
   }
-
 }

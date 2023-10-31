@@ -1,4 +1,9 @@
-.url{
-  width: 200px;
-  height: 200px;
+.main {
+  &_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+  }
 }

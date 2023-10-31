@@ -1,0 +1,32 @@
+.search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 98%;
+  margin: 2rem auto;
+  box-sizing: border-box;
+
+  &_input{
+    min-width: 70%;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+    margin: 0 2rem 0 0;
+    font-family: DeathStar;
+    font-size: 2rem;
+    color: #ebd71c;
+  }
+
+  &_button{
+    width: 4rem;
+    height: 4rem;
+    margin: 0 0.5rem;
+    border: 2px solid #ebd71c;
+    font-family: DeathStar;
+    font-size: 2rem;
+    color: #ebd71c;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.5rem;
+  }
+}

@@ -4,33 +4,34 @@ import { Search } from '../../components/Search/Search';
 import './_main.module.scss';
 import { CardOfPeople } from '../../components/CardOfPeople/CardOfPeople';
 import { IdataPeople } from '../../type/interfaces';
+import style from './_main.module.scss';
 export class Main extends Component {
-  state ={
-    arrPeoples: []
-  }
+  state = {
+    arrPeoples: [],
+  };
 
   componentDidMount() {
     ApiService.getAllPlanets().then((response) => {
       this.setState({
-        arrPeoples: response.results
-      })
+        arrPeoples: response.results,
+      });
       console.log(this.state.arrPeoples);
     });
   }
   render() {
     return (
-    <>
-      <Search/>
-      <section>
-        {this.state.arrPeoples.map((elem: IdataPeople, index: number) => {
-        return (
-          <div key = {index}>
-            <CardOfPeople card = {elem}/>
-          </div>
-        )
-        })}
+      <section className={style.main}>
+        <Search />
+        <div className={style.main_container}>
+          {this.state.arrPeoples.map((elem: IdataPeople, index: number) => {
+            return (
+              <div key={index}>
+                <CardOfPeople card={elem} />
+              </div>
+            );
+          })}
+        </div>
       </section>
-    </>
     );
   }
 }

@@ -41,7 +41,7 @@ export class Header extends Component {
     return (
       <header className={style.header}>
         <div className={style.header_logo}>
-          <img className={style.logo_img}  src={logo} alt="logo" />
+          <img className={style.logo_img} src={logo} alt="logo" />
           <div className={style.logo_name}>
             <span className={style.name_span1}>Star Wards</span>
             <span className={style.name_span2}> Wikipedia</span>
@@ -50,7 +50,10 @@ export class Header extends Component {
         <nav className={style.header_nav}>
           <div>Main</div>
         </nav>
-        <button className={style.button_music} onClick={() => this.toggleMusic()}>
+        <button
+          className={style.button_music}
+          onClick={() => this.toggleMusic()}
+        >
           {this.state.isPlaying ? 'Pause Music' : 'Play Music'}
         </button>
       </header>
