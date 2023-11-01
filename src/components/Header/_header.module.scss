@@ -1,0 +1,56 @@
+.header {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+
+  &_logo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: DeathStar;
+    font-size: 2rem;
+
+    .logo_img {
+      max-width: 10rem;
+    }
+
+    .logo_name {
+      margin-left: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      line-height: 2rem;
+      color: #ebd71c;
+    }
+  }
+
+  .header_nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: DeathStar;
+    font-size: 2rem;
+  }
+
+  .button_music,
+  .button_error {
+    height: 5rem;
+    border: 2px solid #ebd71c;
+    font-family: DeathStar;
+    font-size: 2rem;
+    color: #ebd71c;
+    font-weight: bold;
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    .button_img {
+      height: 100%;
+      width: 90%;
+    }
+  }
+  .button_error {
+    background: transparent;
+  }
+}

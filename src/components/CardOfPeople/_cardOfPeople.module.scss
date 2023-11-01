@@ -1,0 +1,42 @@
+.card {
+  border: 2px solid #ebd71c;
+  background-color: #000000;
+  font-family: Star_Wards;
+  font-size: 1rem;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 0.5rem;
+  letter-spacing: 0.09rem;
+  font-weight: 400;
+  margin: 0.5rem;
+  min-width: 15rem;
+  max-width: 15rem;
+  min-height: 32rem;
+  max-height: 32rem;
+  .card_img_block {
+    min-height: 335px;
+    max-height: 335px;
+    overflow: hidden;
+    .card_img {
+      width: 100%;
+      background-color: #ffffff;
+    }
+  }
+  .card_title {
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+    font-weight: bold;
+    font-family: DeathStar;
+    color: #ebd71c;
+  }
+  .card_height,
+  .card_mass,
+  .card_gender,
+  .card_hair_color,
+  .card_skin_color {
+    padding-bottom: 0.2rem;
+  }
+  .card_span {
+    font-size: 0.8rem;
+  }
+}
