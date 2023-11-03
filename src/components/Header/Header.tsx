@@ -1,74 +1,62 @@
-import { Component, ReactNode } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import soundtrack from '/audio/zvezdnye-vojny-enikin-i-padme_(zzz.fm).mp3';
 import style from './_header.module.scss';
 import Logo from '/assets/images/star-wars-logo-png-image.png';
-import ErroLogo from '/assets/images/EternalGalacticEmpireLogo.webp';
-import { HeaderState } from '../../type/type';
+import ErrorLogo from '/assets/images/EternalGalacticEmpireLogo.webp';
 
-export class Header extends Component {
-  audio: HTMLAudioElement | null = null;
-  state: HeaderState = {
-    isPlaying: false,
-    hasError: false,
-  };
+export function Header(): JSX.Element {
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  public componentDidMount(): void {
-    this.initializeAudio();
-  }
-  private initializeAudio(): void {
-    this.audio = new Audio(soundtrack);
-    this.audio.volume = 0.2;
-  }
+  useEffect((): void => {
+    const audio = new Audio(soundtrack);
+    audio.volume = 0.2;
+    audioRef.current = audio;
+  }, []);
 
-  private toggleMusic(): void {
-    if (this.audio) {
-      if (this.state.isPlaying) {
-        this.audio.pause();
-        this.setState({
-          isPlaying: false,
-        });
+  function playAndPauseMusic(): void {
+    const audio = audioRef.current;
+    if (audio) {
+      if (!isPlaying) {
+        audio.play();
+        setIsPlaying(true);
       } else {
-        this.audio.play();
-        this.setState({
-          isPlaying: true,
-        });
+        audio.pause();
+        setIsPlaying(false);
       }
     }
   }
 
-  public render(): ReactNode {
-    if (this.state.hasError) {
+  useEffect((): void => {
+    if (hasError) {
       throw new Error('Error!');
     }
-    return (
-      <header className={style.header}>
-        <div className={style.header_logo}>
-          <img className={style.logo_img} src={Logo} alt="logo" />
-          <div className={style.logo_name}>
-            <span className={style.name_span1}>Star Wards</span>
-            <span className={style.name_span2}> Wikipedia</span>
-          </div>
+  }, [hasError]);
+
+  return (
+    <header className={style.header}>
+      <div className={style.header_logo}>
+        <img className={style.logo_img} src={Logo} alt="logo" />
+        <div className={style.logo_name}>
+          <span className={style.name_span1}>Star Wars</span>
+          <span className={style.name_span2}>Wikipedia</span>
         </div>
-        <nav className={style.header_nav}>
-          <div>Main</div>
-        </nav>
-        <button
-          className={style.button_music}
-          onClick={() => this.toggleMusic()}
-        >
-          {this.state.isPlaying ? 'Pause Music' : 'Play Music'}
-        </button>
-        <button
-          className={style.button_error}
-          onClick={() => {
-            this.setState({
-              hasError: !this.state.hasError,
-            });
-          }}
-        >
-          <img className={style.button_img} src={ErroLogo} alt="Error" />
-        </button>
-      </header>
-    );
-  }
+      </div>
+      <button
+        className={style.button_music}
+        onClick={playAndPauseMusic}
+      >
+        {isPlaying ? 'Pause Music' : 'Play Music'}
+      </button>
+      <button
+        className={style.button_error}
+        onClick={() => {
+          setHasError(!hasError);
+        }}
+      >
+        <img className={style.button_img} src={ErrorLogo} alt="Error" />
+      </button>
+    </header>
+  );
 }

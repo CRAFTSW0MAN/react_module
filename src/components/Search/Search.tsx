@@ -1,53 +1,42 @@
-import { ChangeEvent, Component, ReactNode } from 'react';
+import { ChangeEvent, useState } from 'react';
 import SearchLogo from '/assets/images/search.png';
 import DeleteLogo from '/assets/images/delete.png';
 import style from './_search.module.scss';
-import { IStateSearch } from '../../type/interfaces';
-export class Search extends Component<{
-  upDate: (dataSearch: string) => void;
-  upDateSearch: (search: string) => void;
-}> {
-  inputValueSearch = localStorage.getItem('searchQuery');
-  state: IStateSearch = {
-    search: this.inputValueSearch ? this.inputValueSearch : '',
-  };
 
-  private OnChangeInput(e: ChangeEvent<HTMLInputElement>): void {
-    this.setState({
-      search: e.target.value,
-    });
-  }
-  private OnClickButtonSearch(): void {
-    localStorage.setItem('searchQuery', this.state.search);
-    console.log(this.state.search);
-    this.props.upDate(this.state.search);
-    this.props.upDateSearch(this.state.search);
-  }
-  private OnClickButtonDelete(): void {
-    localStorage.setItem('searchQuery', '');
-    this.setState({
-      search: '',
-    });
+
+type UpdateSearchFunction = (search: string) => void;
+
+interface SearchProps {
+  upDateSearch: UpdateSearchFunction;
+}
+
+export function Search({ upDateSearch }: SearchProps): JSX.Element  {
+  const inputValueSearch = localStorage.getItem('searchQuery');
+  const [search, setSearch]= useState(inputValueSearch ? inputValueSearch : '')
+
+  function OnChangeInput(e: ChangeEvent<HTMLInputElement>): void {setSearch(e.target.value)}
+
+  function OnClickButtonDelete(): void {
     const emptyString = '';
-    this.props.upDate(emptyString);
-    this.props.upDateSearch(emptyString);
+    setSearch(emptyString);
+    upDateSearch(emptyString);
   }
-  public render(): ReactNode {
+
     return (
       <div className={style.search}>
         <input
           className={style.search_input}
           type="text"
           placeholder="Search..."
-          onChange={(e): void => {
-            this.OnChangeInput(e);
-          }}
-          value={this.state.search}
           autoFocus={true}
+          onChange={(e): void => {
+            OnChangeInput(e);
+          }}
+          defaultValue={search}
         />
         <button
           className={style.search_button}
-          onClick={() => this.OnClickButtonSearch()}
+          onClick={() => upDateSearch(search)}
         >
           <img
             className={style.search_button_img}
@@ -57,7 +46,7 @@ export class Search extends Component<{
         </button>
         <button
           className={style.search_button}
-          onClick={() => this.OnClickButtonDelete()}
+          onClick={OnClickButtonDelete}
         >
           <img
             className={style.search_button_img}
@@ -67,5 +56,4 @@ export class Search extends Component<{
         </button>
       </div>
     );
-  }
 }

@@ -16,6 +16,14 @@ export interface IdataPeople {
   edited: string;
   url: string;
 }
+export interface IdataCardPeople{
+  name: string;
+  height: string;
+  mass: string;
+  hair_color: string;
+  skin_color: string;
+  gender: string;
+}
 export interface IpeopleImages {
   [key: string]: string;
 }

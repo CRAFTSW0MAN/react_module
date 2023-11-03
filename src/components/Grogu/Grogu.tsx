@@ -1,7 +1,5 @@
-import { Component, ReactNode } from 'react';
 import style from './_grogu.module.scss';
-export class Grogu extends Component {
-  public render(): ReactNode {
+export function Grogu (): JSX.Element {
     return (
       <div className={style.container}>
         <div className={style.suns}></div>
@@ -25,5 +23,4 @@ export class Grogu extends Component {
         <div className={style.right_hand}></div>
       </div>
     );
-  }
 }

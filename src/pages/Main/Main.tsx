@@ -1,77 +1,62 @@
 import { ApiService } from '../../api/Api';
-import { Component, ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import { Search } from '../../components/Search/Search';
 import './_main.module.scss';
-import { CardOfPeople } from '../../components/CardOfPeople/CardOfPeople';
-import { IdataPeople, IStateMain } from '../../type/interfaces';
+import { IdataPeople } from '../../type/interfaces';
 import style from './_main.module.scss';
 import { Grogu } from '../../components/Grogu/Grogu';
-export class Main extends Component {
-  inputValueSearch = localStorage.getItem('searchQuery');
-  state: IStateMain = {
-    arrPeoples: [],
-    dataSearch: this.inputValueSearch ? this.inputValueSearch : '',
-    grogySpinner: false,
+import { CardOfPeople } from '../../components/CardOfPeople/CardOfPeople';
+
+export function Main(): JSX.Element {
+  const inputValueSearch = localStorage.getItem('searchQuery');
+  const [arrPeoples, setArrPeoples] = useState<IdataPeople[]>([]);
+  const [dataSearch, setDataSearch] = useState<string>(
+    inputValueSearch ? inputValueSearch : ''
+  );
+  const [groguSpinner, setGroguSpinner] = useState<boolean>(false);
+
+  useEffect(() : void => {
+    setGroguSpinner(true);
+    ApiService(dataSearch).then((response) => {
+      setGroguSpinner(false);
+      setArrPeoples(response);
+    });
+  }, [dataSearch]);
+
+  const upDateArrPeoples = (search: string): void  => {
+    localStorage.setItem('searchQuery', search);
+    setDataSearch(search);
   };
 
-  public componentDidMount(): void {
-    this.callApiServer();
-  }
-
-  public componentDidUpdate(prevProps: unknown, prevState: IStateMain): void {
-    if (prevState.dataSearch !== this.state.dataSearch) {
-      this.callApiServer();
-    }
-  }
-
-  private callApiServer() {
-    this.setState({
-      grogySpinner: true,
-    });
-    ApiService.getAllPlanets(this.state.dataSearch).then((response) => {
-      this.setState({
-        grogySpinner: false,
-        arrPeoples: response.results,
-      });
-    });
-  }
-
-  public render(): ReactNode {
-    const upDatearrPeoples = (dataSearch: string) => {
-      ApiService.getAllPlanets(dataSearch).then((response) => {
-        this.setState({
-          arrPeoples: response.results,
-        });
-      });
-    };
-    const upDateDataSerch = (data: string) => {
-      this.setState({
-        dataSearch: data,
-      });
-    };
-    return (
-      <section className={style.main}>
-        <Search upDate={upDatearrPeoples} upDateSearch={upDateDataSerch} />
-        {this.state.grogySpinner ? (
-          <Grogu />
-        ) : (
-          <div className={style.main_container}>
-            {this.state.arrPeoples.length ? (
-              this.state.arrPeoples.map((elem: IdataPeople, index: number) => {
-                return (
-                  <div key={index}>
-                    <CardOfPeople card={elem} />
-                  </div>
-                );
-              })
-            ) : (
-              <div className={style.main_empty}>
-                Unfortunately nothing was found for your request!
-              </div>
-            )}
-          </div>
-        )}
-      </section>
-    );
-  }
+  return (
+    <section className={style.main}>
+      <Search  upDateSearch ={upDateArrPeoples}/>
+      {groguSpinner ? (
+        <Grogu />
+      ) : (
+        <div className={style.main_container}>
+          {arrPeoples.length ? (
+            arrPeoples.map((elem: IdataPeople, index: number) => {
+              return (
+                <div key={index}>
+                  <CardOfPeople
+                    name={elem.name}
+                    height={elem.height}
+                    mass={elem.mass}
+                    gender={elem.gender}
+                    hair_color={elem.hair_color}
+                    skin_color={elem.skin_color}
+                  />
+                </div>
+              );
+            })
+          ) : (
+            <div className={style.main_empty}>
+              Unfortunately nothing was found for your request!
+            </div>
+          )}
+        </div>
+      )}
+    </section>
+  );
 }
