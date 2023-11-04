@@ -1,8 +1,6 @@
 import style from './_limit-item.module.scss';
 
-
 export function LimitItem(): JSX.Element {
-
   return (
     <div className={style.pagination}>
       <select name="LimitItem" id="limitItem">

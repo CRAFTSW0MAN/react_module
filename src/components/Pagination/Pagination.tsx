@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import style from './_pagination.module.scss';
 
-type UpdatePageFunction = (page: number)=> void;
-
+type UpdatePageFunction = (page: number) => void;
 
 interface IpropsPage {
   countPage: number;
@@ -11,13 +10,13 @@ interface IpropsPage {
 }
 
 export function Pagination(propsPage: IpropsPage): JSX.Element {
-  const { countPage , countItem , handleUpdatePage } = propsPage;
+  const { countPage, countItem, handleUpdatePage } = propsPage;
   const [page, setPage] = useState<number>(countPage);
 
   function handleOnClickPrev() {
     if (page > 1) {
       setPage(page - 1);
-      handleUpdatePage(page-1);
+      handleUpdatePage(page - 1);
     }
   }
   function handleOnClickNext() {

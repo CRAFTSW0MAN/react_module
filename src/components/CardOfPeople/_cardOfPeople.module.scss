@@ -1,4 +1,9 @@
 .card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  text-align: center;
   border: 2px solid #ebd71c;
   background-color: #000000;
   font-family: Star_Wards;
@@ -11,8 +16,8 @@
   margin: 0.5rem;
   min-width: 15rem;
   max-width: 15rem;
-  min-height: 32rem;
-  max-height: 32rem;
+  min-height: 25rem;
+  max-height: 25rem;
   .card_img_block {
     min-height: 335px;
     max-height: 335px;
@@ -28,15 +33,5 @@
     font-weight: bold;
     font-family: DeathStar;
     color: #ebd71c;
-  }
-  .card_height,
-  .card_mass,
-  .card_gender,
-  .card_hair_color,
-  .card_skin_color {
-    padding-bottom: 0.2rem;
-  }
-  .card_span {
-    font-size: 0.8rem;
   }
 }

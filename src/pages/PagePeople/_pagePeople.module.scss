@@ -1,0 +1,49 @@
+.card_people {
+  min-width: 50vw;
+  max-width: 50vw;
+
+  .card_block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ebd71c;
+    background-color: #000000;
+    font-family: Star_Wards;
+    font-size: 1rem;
+    color: #ffffff;
+    padding: 10px 0;
+    border-radius: 0.5rem;
+    letter-spacing: 0.09rem;
+    font-weight: 400;
+    margin: 0.5rem;
+    .img_block {
+      max-height: 50vh;
+      overflow: hidden;
+      margin: 0 auto;
+      .card_img {
+        background-color: #ffffff;
+      }
+    }
+    .desc_block {
+      width: 100%;
+      .desc_block_title {
+        font-size: 1.5rem;
+        padding: 0.5rem 0;
+        font-weight: bold;
+        font-family: DeathStar;
+        color: #ebd71c;
+      }
+      .desc_block_height,
+      .desc_block_mass,
+      .desc_block_gender,
+      .desc_block_color,
+      .desc_block_color {
+        padding-bottom: 0.2rem;
+      }
+      .desc_block_span {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

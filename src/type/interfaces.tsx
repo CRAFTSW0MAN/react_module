@@ -16,7 +16,11 @@ export interface IdataPeople {
   edited: string;
   url: string;
 }
-export interface IdataCardPeople{
+
+export interface IdataCardPeople {
+  name: string;
+}
+export interface IdataCardOnePeople {
   name: string;
   height: string;
   mass: string;

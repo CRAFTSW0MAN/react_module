@@ -43,10 +43,7 @@ export function Header(): JSX.Element {
           <span className={style.name_span2}>Wikipedia</span>
         </div>
       </div>
-      <button
-        className={style.button_music}
-        onClick={playAndPauseMusic}
-      >
+      <button className={style.button_music} onClick={playAndPauseMusic}>
         {isPlaying ? 'Pause Music' : 'Play Music'}
       </button>
       <button

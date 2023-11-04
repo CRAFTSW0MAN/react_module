@@ -1,4 +1,4 @@
-.pagination{
+.pagination {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,7 +9,7 @@
   letter-spacing: 0.1rem;
   padding-bottom: 1rem;
 
-  &_button{
+  &_button {
     height: 3rem;
     border: 2px solid #ebd71c;
     color: #ebd71c;
@@ -19,6 +19,4 @@
     cursor: pointer;
     border-radius: 0.5rem;
   }
-
-
 }

@@ -1,22 +1,33 @@
 .main {
-  &_container {
+  min-height: 100vh;
+  &_section {
     display: flex;
-    box-sizing: border-box;
     justify-content: center;
-    align-items:stretch;
-    flex-wrap: wrap;
-    box-sizing: border-box;
-    min-height: calc(100vh - 310px);
+    align-items: flex-start;
+    .main_container {
+      display: flex;
+      box-sizing: border-box;
+      justify-content: center;
+      align-items: stretch;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+      min-width: 50vw;
 
-    .main_empty {
-      position: absolute;
-      max-width: 1100px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      font-family: DeathStar;
-      font-size: 3rem;
+      .main_empty {
+        min-width: 50vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-family: DeathStar;
+        font-size: 3rem;
+      }
+    }
+
+    &_grogu {
+      display: flex;
+      justify-content: center;
+      min-width: 50vw;
     }
   }
 }
