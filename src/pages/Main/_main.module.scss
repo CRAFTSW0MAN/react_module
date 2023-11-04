@@ -1,10 +1,12 @@
 .main {
   &_container {
     display: flex;
+    box-sizing: border-box;
     justify-content: center;
-    align-items: center;
+    align-items:stretch;
     flex-wrap: wrap;
     box-sizing: border-box;
+    min-height: calc(100vh - 310px);
 
     .main_empty {
       position: absolute;

@@ -1,15 +1,15 @@
-export function ApiService(search: string) {
+export function ApiService(page:number, search: string) {
   const baseUrl = `https://swapi.dev/api/people/`;
-  async function getAllPlanets(search: string) {
+  async function getAllPlanets(page:number, search: string) {
     const res: Response = await fetch(
-      `${baseUrl}${search.length ? `?search=${search}` : ''}`,
+      `${baseUrl}?page=${page}${search.length ? `&search=${search}` : ''}`,
       {
         method: 'GET',
       }
     );
     const json = await res.json();
-    return json.results;
+    return json;
   }
 
-  return getAllPlanets(search);
+  return getAllPlanets(page, search);
 }
