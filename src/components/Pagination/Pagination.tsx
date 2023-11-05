@@ -4,13 +4,14 @@ import style from './_pagination.module.scss';
 type UpdatePageFunction = (page: number) => void;
 
 interface IpropsPage {
+  datalimit: number;
   countPage: number;
   countItem: number;
   handleUpdatePage: UpdatePageFunction;
 }
 
 export function Pagination(propsPage: IpropsPage): JSX.Element {
-  const { countPage, countItem, handleUpdatePage } = propsPage;
+  const { datalimit, countPage, countItem, handleUpdatePage } = propsPage;
   const [page, setPage] = useState<number>(countPage);
 
   function handleOnClickPrev() {
@@ -20,7 +21,8 @@ export function Pagination(propsPage: IpropsPage): JSX.Element {
     }
   }
   function handleOnClickNext() {
-    const maxPage = countItem / 10;
+
+    const maxPage = countItem / datalimit;
     if (maxPage > page) {
       setPage(page + 1);
       handleUpdatePage(page + 1);

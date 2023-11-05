@@ -19,19 +19,26 @@ export function MainPage(): JSX.Element {
   const [groguSpinner, setGroguSpinner] = useState<boolean>(true);
   const [countPage, setCountPage] = useState<number>(1);
   const [countItemData, setCountItemData] = useState<number>(0);
+  const [selectedValue, setSelectedValue] = useState('10');
 
   useEffect((): void => {
     setGroguSpinner(true);
-    ApiService(countPage, dataSearch).then((response) => {
+    ApiService(dataSearch, Number(selectedValue), (countPage-1)).then((response) => {
       setGroguSpinner(false);
-      setCountItemData(response.count);
-      setArrPeoples(response.results);
+      setCountItemData(response.total);
+      setArrPeoples(response.products);
+      console.log(response);
     });
-  }, [countItemData, countPage, dataSearch]);
+  }, [countPage, dataSearch, selectedValue]);
+
+  const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedValue(event.target.value);
+    setCountPage(1)
+  };
 
   const handleUpdateSearch = (search: string): void => {
     localStorage.setItem('searchQuery', search);
-    if (search !== dataSearch && search !== '') {
+    if (search !== dataSearch ) {
       setDataSearch(search);
       setCountPage(1);
     }
@@ -55,7 +62,10 @@ export function MainPage(): JSX.Element {
 
   return (
     <section className={style.main}>
-      <LimitItem />
+      <LimitItem
+        selectedValue={selectedValue}
+        handleChange={handleChangeSelect}
+      />
       <Search handleUpdateSearch={handleUpdateSearch} />
       <div className={style.main_section}>
         {groguSpinner ? (
@@ -67,20 +77,16 @@ export function MainPage(): JSX.Element {
             <div className={style.main_container}>
               {arrPeoples.length ? (
                 arrPeoples.map((elem: IdataPeople, index: number) => {
-                  const numberPeople = elem.url
-                    .split('/')
-                    .filter(Boolean)
-                    .pop();
                   return (
                     <Link
                       to={
                         dataSearch === ''
-                          ? `/page=${countPage}/${numberPeople}`
-                          : `/page=${countPage}&search=${dataSearch}/${numberPeople}`
+                          ? `/page=${countPage}/${elem.id}`
+                          : `/page=${countPage}&search=${dataSearch}/${elem.id}`
                       }
                       key={index}
                     >
-                      <CardOfPeople name={elem.name} />
+                      <CardOfPeople title={elem.title} image={elem.images[0]} />
                     </Link>
                   );
                 })
@@ -91,6 +97,7 @@ export function MainPage(): JSX.Element {
               )}
             </div>
             <Pagination
+              datalimit = {Number(selectedValue)}
               countPage={arrPeoples.length ? countPage : 1}
               countItem={arrPeoples.length ? countItemData : 1}
               handleUpdatePage={handleUpdatePage}

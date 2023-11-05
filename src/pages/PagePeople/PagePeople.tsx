@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { ApiPeople } from '../../api/Api';
+import { ApiProduct } from '../../api/Api';
 import { Grogu } from '../../components/Grogu/Grogu';
-import { peopleImages } from '../../components/peopleImages/peopleImages';
-import { IdataPeople } from '../../type/interfaces';
+import { IdataCardOnePeople, IdataPeople } from '../../type/interfaces';
 import style from './_pagePeople.module.scss';
 import DeleteLogo from '/assets/images/delete.png';
 
 export function PagePeople(): JSX.Element {
   const [groguSpinner, setGroguSpinner] = useState<boolean>(false);
-  const [card, setCard] = useState<IdataPeople>();
+  const [dataCard, setDataCard] = useState<IdataPeople>();
+  const [card, setCard] = useState<IdataCardOnePeople>();
   const { id } = useParams();
   const { params } = useParams();
   const navigate = useNavigate();
@@ -17,9 +17,20 @@ export function PagePeople(): JSX.Element {
   useEffect((): void => {
     setGroguSpinner(true);
     if (id) {
-      ApiPeople(id).then((response) => {
+      ApiProduct(id).then((response) => {
         setGroguSpinner(false);
-        setCard(response);
+        setDataCard(response);
+        const newCard:IdataCardOnePeople = {
+          Brand: response.brand,
+          Category: response.category,
+          Rating: response.rating,
+          Price: response.price,
+          Stock: response.stock,
+          DiscountPercentage: response.discountPercentage,
+          Description: response.description,
+        }
+        setCard(newCard);
+
       });
     }
   }, [id]);
@@ -44,63 +55,25 @@ export function PagePeople(): JSX.Element {
                 alt="DeleteCard"
               />
             </button>
-            {card ? (
+            {dataCard && card ? (
               <div className={style.card_block}>
                 <div className={style.img_block}>
                   <img
                     className={style.card_img}
-                    src={
-                      !!peopleImages[`${card.name}`]
-                        ? peopleImages[`${card.name}`]
-                        : peopleImages['no Icon']
-                    }
-                    alt={card.name}
+                    src={dataCard.images[0]}
+                    alt={dataCard.title}
                   />
                 </div>
                 <div className={style.desc_block}>
-                  <div className={style.desc_block_title}>{card.name}</div>
-                  <div className={style.desc_block_birth_year}>
-                    Birth Year:{' '}
-                    <span className={style.desc_block_span}>
-                      {card.birth_year === 'unknown' ? 'n/a' : card.birth_year}
-                    </span>
-                  </div>
-                  <div className={style.desc_block_height}>
-                    Height:{' '}
-                    <span className={style.desc_block_span}>
-                      {card.height === 'unknown' ? 'n/a' : card.height} cm
-                    </span>
-                  </div>
-                  <div className={style.desc_block_mass}>
-                    Mass:{' '}
-                    <span className={style.desc_block_span}>
-                      {card.mass === 'unknown' ? 'n/a' : card.mass} kg
-                    </span>
-                  </div>
-                  <div className={style.desc_block_gender}>
-                    Gender:{' '}
-                    <span className={style.desc_block_span}>
-                      {card.gender === 'unknown' ? 'n/a' : card.gender}
-                    </span>
-                  </div>
-                  <div className={style.desc_block_eye_color}>
-                    Eye Color:{' '}
-                    <span className={style.desc_block_span}>
-                      {card.eye_color === 'unknown' ? 'n/a' : card.eye_color}
-                    </span>
-                  </div>
-                  <div className={style.desc_block_hair_color}>
-                    Hair Color:{' '}
-                    <span className={style.desc_block_span}>
-                      {card.hair_color === 'unknown' ? 'n/a' : card.hair_color}
-                    </span>
-                  </div>
-                  <div className={style.desc_block_skin_color}>
-                    Skin Color:{' '}
-                    <span className={style.desc_block_span}>
-                      {card.skin_color === 'unknown' ? 'n/a' : card.skin_color}
-                    </span>
-                  </div>
+                <div className={style.desc_block_title}>{dataCard.title}</div>
+                  {Object.keys(card).map((keyCard) => {
+                    return (
+                      <div key={keyCard}>
+                        {keyCard.charAt(0).toUpperCase() + keyCard.slice(1)}:
+                        <span className={style.desc_block_span}>{card[keyCard  as keyof IdataCardOnePeople]}</span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             ) : (

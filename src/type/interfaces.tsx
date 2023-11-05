@@ -1,32 +1,29 @@
 export interface IdataPeople {
-  name: string;
-  height: string;
-  mass: string;
-  hair_color: string;
-  skin_color: string;
-  eye_color: string;
-  birth_year: string;
-  gender: string;
-  homeworld: string;
-  films: string;
-  species: string;
-  vehicles: string;
-  starships: string;
-  created: string;
-  edited: string;
-  url: string;
+  brand: string;
+  category: string;
+  description: string;
+  discountPercentage: string;
+  id: string;
+  images: string[];
+  price: string;
+  rating: string;
+  stock: string;
+  thumbnail: string;
+  title: string;
 }
 
 export interface IdataCardPeople {
-  name: string;
+  title: string;
+  image: string;
 }
 export interface IdataCardOnePeople {
-  name: string;
-  height: string;
-  mass: string;
-  hair_color: string;
-  skin_color: string;
-  gender: string;
+  Brand: string;
+  Category: string;
+  Rating: string;
+  Price: string;
+  Stock: string;
+  DiscountPercentage: string;
+  Description: string;
 }
 export interface IpeopleImages {
   [key: string]: string;
