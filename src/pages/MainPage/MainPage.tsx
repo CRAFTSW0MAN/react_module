@@ -64,11 +64,14 @@ export function MainPage(): JSX.Element {
 
   return (
     <section className={style.main}>
-      <LimitItem
-        selectedValue={selectedValue}
-        handleChange={handleChangeSelect}
-      />
-      <Search handleUpdateSearch={handleUpdateSearch} />
+      <div className={style.main_option}>
+        <LimitItem
+          selectedValue={selectedValue}
+          handleChange={handleChangeSelect}
+        />
+        <Search handleUpdateSearch={handleUpdateSearch} />
+      </div>
+
       <div className={style.main_section}>
         {groguSpinner ? (
           <div className={style.main_section_grogu}>

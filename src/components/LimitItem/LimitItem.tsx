@@ -14,8 +14,9 @@ export function LimitItem({
   handleChange,
 }: ILimitProps): JSX.Element {
   return (
-    <div className={style.pagination}>
+    <div className={style.select_block}>
       <select
+        className={style.select}
         name="LimitItem"
         id="limitItem"
         onChange={(e) => handleChange(e)}
