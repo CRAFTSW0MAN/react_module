@@ -28,7 +28,6 @@ export function MainPage(): JSX.Element {
         setGroguSpinner(false);
         setCountItemData(response.total);
         setArrPeoples(response.products);
-        console.log(response);
       }
     );
   }, [countPage, dataSearch, selectedValue]);
