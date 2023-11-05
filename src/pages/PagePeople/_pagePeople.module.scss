@@ -1,8 +1,22 @@
 .card_people {
-  min-width: 50vw;
-  max-width: 50vw;
+  min-width: 40vw;
+  max-width: 40vw;
+  height: 100%;
 
+  .card_people_link {
+    position: absolute;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    width: 98.5vw;
+    min-height: 200vh;
+  }
+  .card_people_button {
+    position: relative;
+    cursor: pointer;
+  }
   .card_block {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,25 +24,27 @@
     border: 2px solid #ebd71c;
     background-color: #000000;
     font-family: Star_Wards;
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: #ffffff;
     padding: 10px 0;
+    box-sizing: border-box;
     border-radius: 0.5rem;
     letter-spacing: 0.09rem;
     font-weight: 400;
-    margin: 0.5rem;
     .img_block {
-      max-height: 50vh;
+      width: 98%;
       overflow: hidden;
       margin: 0 auto;
+      display: flex;
+      justify-content: center;
       .card_img {
         background-color: #ffffff;
       }
     }
     .desc_block {
-      width: 100%;
+      padding: 20px;
       .desc_block_title {
-        font-size: 1.5rem;
+        font-size: 2rem;
         padding: 0.5rem 0;
         font-weight: bold;
         font-family: DeathStar;
@@ -42,7 +58,7 @@
         padding-bottom: 0.2rem;
       }
       .desc_block_span {
-        font-size: 0.8rem;
+        font-size: 1rem;
       }
     }
   }
