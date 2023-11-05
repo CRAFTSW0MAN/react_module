@@ -20,7 +20,7 @@ export function PagePeople(): JSX.Element {
       ApiProduct(id).then((response) => {
         setGroguSpinner(false);
         setDataCard(response);
-        const newCard:IdataCardOnePeople = {
+        const newCard: IdataCardOnePeople = {
           Brand: response.brand,
           Category: response.category,
           Rating: response.rating,
@@ -28,9 +28,8 @@ export function PagePeople(): JSX.Element {
           Stock: response.stock,
           DiscountPercentage: response.discountPercentage,
           Description: response.description,
-        }
+        };
         setCard(newCard);
-
       });
     }
   }, [id]);
@@ -65,12 +64,14 @@ export function PagePeople(): JSX.Element {
                   />
                 </div>
                 <div className={style.desc_block}>
-                <div className={style.desc_block_title}>{dataCard.title}</div>
+                  <div className={style.desc_block_title}>{dataCard.title}</div>
                   {Object.keys(card).map((keyCard) => {
                     return (
                       <div key={keyCard}>
                         {keyCard.charAt(0).toUpperCase() + keyCard.slice(1)}:
-                        <span className={style.desc_block_span}>{card[keyCard  as keyof IdataCardOnePeople]}</span>
+                        <span className={style.desc_block_span}>
+                          {card[keyCard as keyof IdataCardOnePeople]}
+                        </span>
                       </div>
                     );
                   })}

@@ -23,22 +23,24 @@ export function MainPage(): JSX.Element {
 
   useEffect((): void => {
     setGroguSpinner(true);
-    ApiService(dataSearch, Number(selectedValue), (countPage-1)).then((response) => {
-      setGroguSpinner(false);
-      setCountItemData(response.total);
-      setArrPeoples(response.products);
-      console.log(response);
-    });
+    ApiService(dataSearch, Number(selectedValue), countPage - 1).then(
+      (response) => {
+        setGroguSpinner(false);
+        setCountItemData(response.total);
+        setArrPeoples(response.products);
+        console.log(response);
+      }
+    );
   }, [countPage, dataSearch, selectedValue]);
 
   const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedValue(event.target.value);
-    setCountPage(1)
+    setCountPage(1);
   };
 
   const handleUpdateSearch = (search: string): void => {
     localStorage.setItem('searchQuery', search);
-    if (search !== dataSearch ) {
+    if (search !== dataSearch) {
       setDataSearch(search);
       setCountPage(1);
     }
@@ -97,7 +99,7 @@ export function MainPage(): JSX.Element {
               )}
             </div>
             <Pagination
-              datalimit = {Number(selectedValue)}
+              datalimit={Number(selectedValue)}
               countPage={arrPeoples.length ? countPage : 1}
               countItem={arrPeoples.length ? countItemData : 1}
               handleUpdatePage={handleUpdatePage}

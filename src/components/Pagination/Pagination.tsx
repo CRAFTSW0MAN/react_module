@@ -21,7 +21,6 @@ export function Pagination(propsPage: IpropsPage): JSX.Element {
     }
   }
   function handleOnClickNext() {
-
     const maxPage = countItem / datalimit;
     if (maxPage > page) {
       setPage(page + 1);
