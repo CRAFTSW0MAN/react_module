@@ -53,6 +53,7 @@ export const useMainContext = () => {
 };
 
 export function MainPage(): JSX.Element {
+  const inputValueSearch = localStorage.getItem('searchQuery');
   const [searchParams, setSearchParams] = useSearchParams();
   const [arrProducts, setArrProducts] = useState<IdataProduct[]>([]);
   const [groguSpinner, setGroguSpinner] = useState<boolean>(true);
@@ -61,7 +62,7 @@ export function MainPage(): JSX.Element {
     Number(searchParams.get('page')) || 1
   );
   const [dataSearch, setDataSearch] = useState<string>(
-    searchParams.get('search') || ''
+    inputValueSearch ? inputValueSearch : searchParams.get('search') || ''
   );
   const [selectedValue, setSelectedValue] = useState(
     Number(searchParams.get('limit')) || 10

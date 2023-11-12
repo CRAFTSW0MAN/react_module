@@ -12,5 +12,5 @@ test('Ensure that the 404 page is displayed when navigating to an invalid route'
     </MemoryRouter>
   );
   const notFoundPage = screen.getByTestId('not-found-page');
-  expect(notFoundPage).toBeInTheDocument;
+  expect(notFoundPage).toBeInTheDocument();
 });

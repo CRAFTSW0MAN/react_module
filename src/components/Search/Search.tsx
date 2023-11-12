@@ -5,14 +5,18 @@ import style from './_search.module.scss';
 import { MainConsumer, useMainContext } from '../../pages/MainPage/Main.Page';
 
 export function Search(): JSX.Element {
+  const inputValueSearch = localStorage.getItem('searchQuery');
   const data = useMainContext();
-  const [search, setSearch] = useState(data.dataSearch);
+  const [search, setSearch] = useState(
+    inputValueSearch ? inputValueSearch : data.dataSearch
+  );
 
   function handleOnChangeInput(e: ChangeEvent<HTMLInputElement>): void {
     setSearch(e.target.value);
   }
 
   function handleOnClickButtonDelete(): void {
+    localStorage.removeItem('searchQuery');
     const emptyString = '';
     setSearch(emptyString);
     data.handleUpdateSearch(emptyString);
@@ -23,6 +27,7 @@ export function Search(): JSX.Element {
     if (search === '') {
       handleOnClickButtonDelete();
     } else {
+      localStorage.setItem('searchQuery', search);
       data.handleUpdateSearch(search);
     }
   }
