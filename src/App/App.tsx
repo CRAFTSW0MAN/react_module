@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import { MainPage } from '../pages/MainPage/Main.Page';
+import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 import { PageProduct } from '../pages/PageProduct/PageProduct';
 
 import style from './_app.module.scss';
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
         element: <PageProduct />,
       },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
   },
 ]);
 

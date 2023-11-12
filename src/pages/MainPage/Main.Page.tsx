@@ -30,9 +30,9 @@ interface IMainContextData {
 
 export const MainContext = createContext<IMainContextData | null>(null);
 
-const MainProvider = MainContext.Provider;
+export const MainProvider = MainContext.Provider;
 
-interface IMainConsumerProps {
+export interface IMainConsumerProps {
   children: (data: IMainContextData) => React.ReactElement;
 }
 

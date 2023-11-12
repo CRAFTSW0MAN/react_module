@@ -5,7 +5,7 @@ interface IError {
   message: string;
 }
 
-export default function ErrorPage() {
+export default function ErrorPage(): JSX.Element {
   const error = useRouteError() as IError;
   console.error(error);
 
