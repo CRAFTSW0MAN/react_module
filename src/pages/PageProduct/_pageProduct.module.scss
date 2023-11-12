@@ -1,9 +1,9 @@
-.card_people {
+.card_product {
   min-width: 40vw;
   max-width: 40vw;
   height: 100%;
 
-  .card_people_link {
+  .card_product_link {
     position: absolute;
     box-sizing: border-box;
     top: 0;
@@ -11,7 +11,7 @@
     width: 98.5vw;
     min-height: 650vh;
   }
-  .card_people_button {
+  .card_product_button {
     position: relative;
     cursor: pointer;
   }

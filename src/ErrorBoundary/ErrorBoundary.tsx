@@ -1,5 +1,5 @@
 import { Component, ReactNode } from 'react';
-import { IStateError } from '../../type/interfaces';
+import { IStateError } from '../type/interfaces';
 
 export class ErrorBoundary extends Component<
   Record<string, ReactNode>,
@@ -20,12 +20,7 @@ export class ErrorBoundary extends Component<
 
   public render(): ReactNode {
     if (this.state.hasError) {
-      return (
-        <section className="error">
-          <h2>The server has crashed!</h2>
-          <h2>Reload the page!</h2>
-        </section>
-      );
+      return this.props.fallback;
     }
     return this.props.children;
   }

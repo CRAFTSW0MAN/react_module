@@ -2,10 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import soundtrack from '/audio/zvezdnye-vojny-enikin-i-padme_(zzz.fm).mp3';
 import style from './_header.module.scss';
 import Logo from '/assets/images/star-wars-logo-png-image.png';
+import ErrorLogo from '/assets/images/EternalGalacticEmpireLogo.webp';
 
 export function Header(): JSX.Element {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const hasError = false;
+  const [hasError, setHasError] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect((): void => {
@@ -44,6 +45,14 @@ export function Header(): JSX.Element {
       </div>
       <button className={style.button_music} onClick={playAndPauseMusic}>
         {isPlaying ? 'Pause Music' : 'Play Music'}
+      </button>
+      <button
+        className={style.button_error}
+        onClick={() => {
+          setHasError(!hasError);
+        }}
+      >
+        <img className={style.button_img} src={ErrorLogo} alt="Error" />
       </button>
     </header>
   );

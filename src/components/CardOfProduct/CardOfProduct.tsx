@@ -1,7 +1,7 @@
-import { IdataCardPeople } from '../../type/interfaces';
-import style from './_cardOfPeople.module.scss';
+import { IdataCardProduct } from '../../type/interfaces';
+import style from './_cardOfProduct.module.scss';
 
-export function CardOfPeople(card: IdataCardPeople): JSX.Element {
+export function CardOfProduct(card: IdataCardProduct): JSX.Element {
   const { title, image } = card;
   return (
     <div className={style.card}>

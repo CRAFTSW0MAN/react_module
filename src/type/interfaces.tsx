@@ -1,4 +1,4 @@
-export interface IdataPeople {
+export interface IdataProduct {
   brand: string;
   category: string;
   description: string;
@@ -12,11 +12,11 @@ export interface IdataPeople {
   title: string;
 }
 
-export interface IdataCardPeople {
+export interface IdataCardProduct {
   title: string;
   image: string;
 }
-export interface IdataCardOnePeople {
+export interface IdataCardOneProduct {
   Brand: string;
   Category: string;
   Rating: string;
@@ -25,11 +25,11 @@ export interface IdataCardOnePeople {
   DiscountPercentage: string;
   Description: string;
 }
-export interface IpeopleImages {
+export interface IProductImages {
   [key: string]: string;
 }
 export interface IStateMain {
-  arrPeoples: IdataPeople[];
+  arrProducts: IdataProduct[];
   dataSearch: string;
   grogySpinner: boolean;
 }

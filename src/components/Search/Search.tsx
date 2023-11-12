@@ -7,13 +7,14 @@ type UpdateSearchFunction = (search: string) => void;
 
 interface ISearchProps {
   handleUpdateSearch: UpdateSearchFunction;
+  dataSearch: string;
 }
 
-export function Search({ handleUpdateSearch }: ISearchProps): JSX.Element {
-  const inputValueSearch = localStorage.getItem('searchQuery');
-  const [search, setSearch] = useState(
-    inputValueSearch ? inputValueSearch : ''
-  );
+export function Search({
+  handleUpdateSearch,
+  dataSearch,
+}: ISearchProps): JSX.Element {
+  const [search, setSearch] = useState(dataSearch);
 
   function handleOnChangeInput(e: ChangeEvent<HTMLInputElement>): void {
     setSearch(e.target.value);
@@ -25,8 +26,17 @@ export function Search({ handleUpdateSearch }: ISearchProps): JSX.Element {
     handleUpdateSearch(emptyString);
   }
 
+  function handleSubmit(event: React.SyntheticEvent) {
+    event.preventDefault();
+    if (search === '') {
+      handleOnClickButtonDelete();
+    } else {
+      handleUpdateSearch(search);
+    }
+  }
+
   return (
-    <div className={style.search}>
+    <form className={style.search} onSubmit={handleSubmit}>
       <input
         className={style.search_input}
         type="text"
@@ -57,6 +67,6 @@ export function Search({ handleUpdateSearch }: ISearchProps): JSX.Element {
           alt="DeleteLogo"
         />
       </button>
-    </div>
+    </form>
   );
 }

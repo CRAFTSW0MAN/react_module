@@ -1,0 +1,15 @@
+.main_allcard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  .main_empty {
+    min-width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: DeathStar;
+    font-size: 3rem;
+  }
+}

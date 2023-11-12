@@ -5,7 +5,7 @@ type UpdateLimitFunction = (
 ) => void;
 
 interface ILimitProps {
-  selectedValue: string;
+  selectedValue: number;
   handleChange: UpdateLimitFunction;
 }
 
