@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { Outlet, useSearchParams } from 'react-router-dom';
 import { ApiService } from '../../api/Api';
 import { AllCardMain } from '../../components/AllCardMain/AllCardMain';
@@ -9,6 +9,48 @@ import { Pagination } from '../../components/Pagination/Pagination';
 import { Search } from '../../components/Search/Search';
 import { IdataProduct } from '../../type/interfaces';
 import style from './_mainpage.module.scss';
+
+type UpdateLimitFunction = (
+  event: React.ChangeEvent<HTMLSelectElement>
+) => void;
+
+type UpdateSearchFunction = (search: string) => void;
+
+type UpdatePageFunction = (page: number) => void;
+interface IMainContextData {
+  countPage: number;
+  dataSearch: string;
+  selectedValue: number;
+  countItemData: number;
+  arrProducts: IdataProduct[];
+  handleChangeSelect: UpdateLimitFunction;
+  handleUpdateSearch: UpdateSearchFunction;
+  handleUpdatePage: UpdatePageFunction;
+}
+
+export const MainContext = createContext<IMainContextData | null>(null);
+
+const MainProvider = MainContext.Provider;
+
+interface IMainConsumerProps {
+  children: (data: IMainContextData) => React.ReactElement;
+}
+
+export const MainConsumer = (props: IMainConsumerProps) => {
+  const data = useMainContext();
+
+  return props.children(data);
+};
+
+export const useMainContext = () => {
+  const data = useContext(MainContext);
+
+  if (!data) {
+    throw new Error('Can not `useMainContext` outside of the `MainProvider`');
+  }
+
+  return data;
+};
 
 export function MainPage(): JSX.Element {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -43,12 +85,6 @@ export function MainPage(): JSX.Element {
       page: '' + countPage,
       search: '' + dataSearch,
     });
-    console.log(
-      'изменение!',
-      'limit: ' + selectedValue,
-      'page:' + countPage,
-      'search:' + dataSearch
-    );
 
     setGroguSpinner(true);
     ApiService(dataSearch, selectedValue, countPage - 1).then((response) => {
@@ -63,17 +99,22 @@ export function MainPage(): JSX.Element {
   };
 
   return (
-    <section className={style.main}>
+    <MainProvider
+      value={{
+        countPage,
+        countItemData,
+        dataSearch,
+        selectedValue,
+        arrProducts,
+        handleUpdatePage,
+        handleChangeSelect,
+        handleUpdateSearch,
+      }}
+    >
       <Header />
       <section className={style.main_option}>
-        <LimitItem
-          selectedValue={selectedValue}
-          handleChange={handleChangeSelect}
-        />
-        <Search
-          handleUpdateSearch={handleUpdateSearch}
-          dataSearch={dataSearch}
-        />
+        <LimitItem />
+        <Search />
       </section>
       {groguSpinner ? (
         <div className={style.main_grogu}>
@@ -82,17 +123,12 @@ export function MainPage(): JSX.Element {
       ) : (
         <div className={style.main_section}>
           <div className={style.main_container}>
-            <AllCardMain allProducts={arrProducts} />
-            <Pagination
-              datalimit={Number(selectedValue)}
-              countPage={arrProducts.length ? countPage : 1}
-              countItem={arrProducts.length ? countItemData : 1}
-              handleUpdatePage={handleUpdatePage}
-            />
+            <AllCardMain />
+            <Pagination />
           </div>
           <Outlet />
         </div>
       )}
-    </section>
+    </MainProvider>
   );
 }

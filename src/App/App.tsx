@@ -5,14 +5,6 @@ import { PageProduct } from '../pages/PageProduct/PageProduct';
 
 import style from './_app.module.scss';
 
-// const router = createBrowserRouter(
-//   createRoutesFromElements(
-//     <Route path="/" element={<MainPage />}>
-//       <Route path="/product/:id" element={<PageProduct />} />
-//     </Route>
-//   )
-// );
-
 const router = createBrowserRouter([
   {
     path: '/',

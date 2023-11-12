@@ -1,26 +1,24 @@
-.main {
-  .main_section {
+.main_section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  .main_container {
     display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
     justify-content: center;
-    align-items: flex-start;
-    .main_container {
-      display: flex;
-      flex-direction: column;
-      box-sizing: border-box;
-      justify-content: center;
-      align-items: stretch;
-      flex-wrap: wrap;
-      min-width: 50vw;
-    }
-  }
-  &_option {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  &_grogu {
-    display: flex;
-    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
     min-width: 50vw;
   }
+}
+.main_option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main_grogu {
+  display: flex;
+  justify-content: center;
+  min-width: 50vw;
 }
