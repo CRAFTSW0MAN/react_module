@@ -50,7 +50,7 @@ export function PageProduct(): JSX.Element {
   }, [id]);
 
   return (
-    <section className={style.card_product}>
+    <section className={style.card_product} >
       {groguSpinner ? (
         <div className={style.section_grogu}>
           <Grogu />
@@ -60,6 +60,7 @@ export function PageProduct(): JSX.Element {
           <button
             className={style.card_product_button}
             onClick={() => navigate(`/${location.search}`)}
+            data-testid='DeleteCard'
           >
             <img
               className={style.button_img}
@@ -68,7 +69,7 @@ export function PageProduct(): JSX.Element {
             />
           </button>
           {dataCard && card ? (
-            <div className={style.card_block} ref={cardRef}>
+            <div className={style.card_block} ref={cardRef} data-testid='card-block'>
               <div className={style.img_block}>
                 <img
                   className={style.card_img}

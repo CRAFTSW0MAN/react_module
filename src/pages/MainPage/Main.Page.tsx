@@ -17,7 +17,7 @@ type UpdateLimitFunction = (
 type UpdateSearchFunction = (search: string) => void;
 
 type UpdatePageFunction = (page: number) => void;
-interface IMainContextData {
+export interface IMainContextData {
   countPage: number;
   dataSearch: string;
   selectedValue: number;
@@ -28,7 +28,16 @@ interface IMainContextData {
   handleUpdatePage: UpdatePageFunction;
 }
 
-export const MainContext = createContext<IMainContextData | null>(null);
+export const MainContext = createContext<IMainContextData>({
+  countPage: 1,
+  dataSearch: '',
+  selectedValue: 10,
+  countItemData: 1,
+  arrProducts: [],
+  handleChangeSelect: ( ) => {},
+  handleUpdateSearch:  () => {},
+  handleUpdatePage:  () => {},
+});
 
 export const MainProvider = MainContext.Provider;
 
