@@ -13,7 +13,11 @@ export function AllCardMain(): JSX.Element {
         <div className={style.main_allcard}>
           {arrProducts.length ? (
             arrProducts.map((elem: IdataProduct, index: number) => (
-              <Link to={`/product/${elem.id}${location.search}`} key={index} data-testid='card-of-list'>
+              <Link
+                to={`/product/${elem.id}${location.search}`}
+                key={index}
+                data-testid="card-of-list"
+              >
                 <CardOfProduct title={elem.title} image={elem.images[0]} />
               </Link>
             ))

@@ -39,8 +39,8 @@ export function Header(): JSX.Element {
       <div className={style.header_logo}>
         <img className={style.logo_img} src={Logo} alt="logo" />
         <div className={style.logo_name}>
-          <span className={style.name_span1}>Star Wars</span>
-          <span className={style.name_span2}>Wikipedia</span>
+          <span className={style.name_span1}>OZON</span>
+          <span className={style.name_span2}>SHOP</span>
         </div>
       </div>
       <button className={style.button_music} onClick={playAndPauseMusic}>

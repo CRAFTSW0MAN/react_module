@@ -34,9 +34,9 @@ export const MainContext = createContext<IMainContextData>({
   selectedValue: 10,
   countItemData: 1,
   arrProducts: [],
-  handleChangeSelect: ( ) => {},
-  handleUpdateSearch:  () => {},
-  handleUpdatePage:  () => {},
+  handleChangeSelect: () => {},
+  handleUpdateSearch: () => {},
+  handleUpdatePage: () => {},
 });
 
 export const MainProvider = MainContext.Provider;

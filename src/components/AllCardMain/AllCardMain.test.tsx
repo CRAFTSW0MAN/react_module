@@ -1,11 +1,12 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { AllCardMain } from './AllCardMain';
 import { MainContext } from '../../pages/MainPage/Main.Page';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { IdataProduct } from '../../type/interfaces';
+import { PageProduct } from '../../pages/PageProduct/PageProduct';
 
 describe('AllCardMain component', () => {
-  test('renders specified number of cards', async () => {
+  test('Verify that the component renders the specified number of cards', async () => {
     const arrProducts = [
       {
         brand: 'Product 1',
@@ -91,7 +92,7 @@ describe('AllCardMain component', () => {
     expect(cardElements.length).toBe(3);
   });
 
-  test('отображает сообщение об отсутствии карт', () => {
+  test(' Check that an appropriate message is displayed if no cards are present.', () => {
     const arrProducts: IdataProduct[] = [];
     const countPage = 1;
     const countItemData = 1;
@@ -136,5 +137,71 @@ describe('AllCardMain component', () => {
       'Unfortunately nothing was found for your request!'
     );
     expect(emptyMessage).toBeInTheDocument();
+  });
+
+  test('Validate that clicking on a card opens a detailed card component', () => {
+    const arrProducts = [
+      {
+        brand: 'Product 1',
+        category: 'Product 1',
+        description: 'Product 1',
+        discountPercentage: 'Product 1',
+        id: '1',
+        images: ['image1.jpg'],
+        price: 'Product 1',
+        rating: 'Product 1',
+        stock: 'Product 1',
+        thumbnail: 'Product 1',
+        title: 'Product 1',
+      },
+    ];
+
+    const countPage = 1;
+    const countItemData = 1;
+    const dataSearch = 'test query';
+    const selectedValue = 10;
+    const handleUpdatePage = (page: number) => {
+      console.log(page);
+    };
+    const handleChangeSelect = (
+      event: React.ChangeEvent<HTMLSelectElement>
+    ) => {
+      console.log(event);
+    };
+    const handleUpdateSearch = (search: string) => {
+      console.log(search);
+    };
+    render(
+      <MemoryRouter initialEntries={['/']} initialIndex={0}>
+        <Routes>
+          <Route path="/" element={<AllCardMain />} />
+          <Route path="/product/:id" element={<PageProduct />} />
+        </Routes>
+      </MemoryRouter>,
+      {
+        wrapper: ({ children }) => (
+          <MainContext.Provider
+            value={{
+              countPage,
+              countItemData,
+              dataSearch,
+              selectedValue,
+              arrProducts,
+              handleUpdatePage,
+              handleChangeSelect,
+              handleUpdateSearch,
+            }}
+          >
+            {children}
+          </MainContext.Provider>
+        ),
+      }
+    );
+
+    const cardElement = screen.getByTestId('card-of-list');
+    fireEvent.click(cardElement);
+
+    const pageProductElement = screen.getByTestId('page-product');
+    expect(pageProductElement).toBeInTheDocument();
   });
 });

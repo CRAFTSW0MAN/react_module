@@ -26,7 +26,7 @@ const router = createBrowserRouter([
 
 export function App() {
   return (
-    <section className={style.container}>
+    <section className={style.container} data-testid="app">
       <RouterProvider router={router} />
     </section>
   );

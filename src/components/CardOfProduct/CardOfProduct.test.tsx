@@ -1,9 +1,9 @@
-import {  render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { CardOfProduct } from './CardOfProduct';
 
 describe('PokemonCard', () => {
-  it(' the card component renders the relevant card data', async () => {
+  it('The card component renders the relevant card data', async () => {
     const data = { title: 'Phone 10', image: 'url' };
 
     render(
@@ -18,4 +18,4 @@ describe('PokemonCard', () => {
     const image = screen.getByAltText(data.title);
     expect(image).toHaveAttribute('src', data.image);
   });
-})
+});
