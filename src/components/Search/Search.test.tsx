@@ -10,17 +10,9 @@ describe('Search', () => {
     const dataSearch = 'test query';
     const selectedValue = 10;
     const arrProducts: IdataProduct[] = [];
-    const handleUpdatePage = (page: number) => {
-      console.log(page);
-    };
-    const handleChangeSelect = (
-      event: React.ChangeEvent<HTMLSelectElement>
-    ) => {
-      console.log(event);
-    };
-    const handleUpdateSearch = (search: string) => {
-      console.log(search);
-    };
+    const handleUpdatePage = vi.fn();
+    const handleChangeSelect = vi.fn();
+    const handleUpdateSearch = vi.fn();
     render(
       <MainContext.Provider
         value={{
@@ -59,17 +51,9 @@ describe('Search component', () => {
     const dataSearch = '';
     const selectedValue = 10;
     const arrProducts: IdataProduct[] = [];
-    const handleUpdatePage = (page: number) => {
-      console.log(page);
-    };
-    const handleChangeSelect = (
-      event: React.ChangeEvent<HTMLSelectElement>
-    ) => {
-      console.log(event);
-    };
-    const handleUpdateSearch = (search: string) => {
-      console.log(search);
-    };
+    const handleUpdatePage = vi.fn();
+    const handleChangeSelect = vi.fn();
+    const handleUpdateSearch = vi.fn();
 
     localStorage.setItem('searchQuery', 'test value');
 

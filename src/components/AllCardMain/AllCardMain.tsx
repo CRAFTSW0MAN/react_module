@@ -6,7 +6,6 @@ import { MainConsumer } from '../../pages/MainPage/Main.Page';
 
 export function AllCardMain(): JSX.Element {
   const location = useLocation();
-  console.log(location);
 
   return (
     <MainConsumer>

@@ -24,12 +24,22 @@ export function Pagination(): JSX.Element {
   }
 
   return (
-    <div className={style.pagination}>
-      <button className={style.pagination_button} onClick={handleOnClickPrev}>
+    <div className={style.pagination} data-testid="pagination">
+      <button
+        className={style.pagination_button}
+        onClick={handleOnClickPrev}
+        data-testid="Prev"
+      >
         Prev
       </button>
-      <div className={style.pagination_page}>{page}</div>
-      <button className={style.pagination_button} onClick={handleOnClickNext}>
+      <div className={style.pagination_page} data-testid="page">
+        {page}
+      </div>
+      <button
+        className={style.pagination_button}
+        onClick={handleOnClickNext}
+        data-testid="Next"
+      >
         Next
       </button>
     </div>

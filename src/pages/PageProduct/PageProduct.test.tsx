@@ -7,7 +7,6 @@ import { PageProduct } from './PageProduct';
 
 import * as api from '../../api/Api';
 
-
 describe('PageProduct', () => {
   vi.spyOn(api, 'ApiProduct').mockImplementation((): Promise<IdataProduct> => {
     return new Promise((resolve) => {
@@ -43,7 +42,6 @@ describe('PageProduct', () => {
       expect(screen.queryByTestId('section-grogu')).not.toBeInTheDocument()
     );
   });
-
 
   test('7.2.Make sure the detailed card component correctly displays the detailed card data', async () => {
     const arrProducts = [
@@ -198,34 +196,33 @@ describe('PageProduct', () => {
     expect(pageProductElement).toBeInTheDocument();
 
     const button = await screen.findByTestId('DeleteCard');
-    fireEvent.click( button);
+    fireEvent.click(button);
     expect(screen.queryByTestId('page-product')).toBeNull();
   });
-
-
 });
 
 test('6.3 Check that clicking triggers an additional API call to fetch detailed information.', async () => {
-  
-  const mockApiProduct =  vi.spyOn(api, 'ApiProduct').mockImplementation((): Promise<IdataProduct> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          brand: 'Sumsung',
-          category: 'telephone',
-          rating: '4',
-          price: '99.99',
-          stock: '10',
-          discountPercentage: '20',
-          description: 'dwadwd wdawda',
-          images: ['image1.jpg', 'image2.jpg'],
-          title: 'Phone90',
-          id: '2',
-          thumbnail: 'pop',
-        });
-      }, 1000);
+  const mockApiProduct = vi
+    .spyOn(api, 'ApiProduct')
+    .mockImplementation((): Promise<IdataProduct> => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({
+            brand: 'Sumsung',
+            category: 'telephone',
+            rating: '4',
+            price: '99.99',
+            stock: '10',
+            discountPercentage: '20',
+            description: 'dwadwd wdawda',
+            images: ['image1.jpg', 'image2.jpg'],
+            title: 'Phone90',
+            id: '2',
+            thumbnail: 'pop',
+          });
+        }, 1000);
+      });
     });
-  });
 
   render(
     <MemoryRouter initialEntries={['/product/2']}>
@@ -236,4 +233,3 @@ test('6.3 Check that clicking triggers an additional API call to fetch detailed 
   );
   expect(mockApiProduct).toHaveBeenCalledWith('2');
 });
-
