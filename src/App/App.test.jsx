@@ -4,7 +4,7 @@ import { App } from './App';
 
 test('renders without errors', () => {
   render(<App />);
-  
+
   const containerElement = screen.getByTestId('app');
   expect(containerElement).toBeInTheDocument();
 });

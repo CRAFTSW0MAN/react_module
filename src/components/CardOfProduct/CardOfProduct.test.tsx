@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { CardOfProduct } from './CardOfProduct';
 
 describe('PokemonCard', () => {
-  it('The card component renders the relevant card data', async () => {
+  it('6.1 The card component renders the relevant card data', async () => {
     const data = { title: 'Phone 10', image: 'url' };
 
     render(

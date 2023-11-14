@@ -7,7 +7,7 @@ import { Header } from '../../components/Header/Header';
 import { LimitItem } from '../../components/LimitItem/LimitItem';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { Search } from '../../components/Search/Search';
-import { IdataProduct } from '../../type/interfaces';
+import { IdataProduct } from '../../type/interfaces..interface';
 import style from './_mainpage.module.scss';
 
 type UpdateLimitFunction = (

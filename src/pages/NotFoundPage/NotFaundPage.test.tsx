@@ -3,7 +3,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import NotFoundPage from './NotFoundPage';
 import { expect } from 'vitest';
 
-test('Ensure that the 404 page is displayed when navigating to an invalid route', () => {
+test('10.1Ensure that the 404 page is displayed when navigating to an invalid route', () => {
   render(
     <MemoryRouter initialEntries={['/invalid-route']} initialIndex={0}>
       <Routes>

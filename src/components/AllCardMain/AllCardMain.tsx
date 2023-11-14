@@ -1,4 +1,4 @@
-import { IdataProduct } from '../../type/interfaces';
+import { IdataProduct } from '../../type/interfaces..interface';
 import style from './_allcard.module.scss';
 import { Link, useLocation } from 'react-router-dom';
 import { CardOfProduct } from '../CardOfProduct/CardOfProduct';
@@ -6,6 +6,7 @@ import { MainConsumer } from '../../pages/MainPage/Main.Page';
 
 export function AllCardMain(): JSX.Element {
   const location = useLocation();
+  console.log(location);
 
   return (
     <MainConsumer>

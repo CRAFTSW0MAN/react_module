@@ -19,6 +19,7 @@ export default defineConfig({
       extension: ['ts', 'tsx'],
       include: ['src'],
       all: true,
+      exclude: ['**/*.type.ts', '**/*.d.ts', '**/*.interface.ts'],
     },
   },
 });

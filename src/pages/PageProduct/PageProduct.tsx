@@ -2,12 +2,15 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ApiProduct } from '../../api/Api';
 import { Grogu } from '../../components/Grogu/Grogu';
-import { IdataCardOneProduct, IdataProduct } from '../../type/interfaces';
+import {
+  IdataCardOneProduct,
+  IdataProduct,
+} from '../../type/interfaces..interface';
 import style from './_pageproduct.module.scss';
 import DeleteLogo from '/assets/images/delete.png';
 
 export function PageProduct(): JSX.Element {
-  const [groguSpinner, setGroguSpinner] = useState<boolean>(false);
+  const [groguSpinner, setGroguSpinner] = useState<boolean>(true);
   const [dataCard, setDataCard] = useState<IdataProduct>();
   const [card, setCard] = useState<IdataCardOneProduct>();
   const location = useLocation();
@@ -79,15 +82,21 @@ export function PageProduct(): JSX.Element {
                   className={style.card_img}
                   src={dataCard.images[0]}
                   alt={dataCard.title}
+                  data-testid="card-image"
                 />
               </div>
               <div className={style.desc_block}>
-                <div className={style.desc_block_title}>{dataCard.title}</div>
+                <p className={style.desc_block_title} data-testid="Title">
+                  {dataCard.title}
+                </p>
                 {Object.keys(card).map((keyCard) => {
                   return (
                     <div key={keyCard}>
                       {keyCard.charAt(0).toUpperCase() + keyCard.slice(1)}:
-                      <span className={style.desc_block_span}>
+                      <span
+                        className={style.desc_block_span}
+                        data-testid={keyCard}
+                      >
                         {card[keyCard as keyof IdataCardOneProduct]}
                       </span>
                     </div>

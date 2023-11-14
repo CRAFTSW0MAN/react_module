@@ -1,5 +1,5 @@
 import { Component, ReactNode } from 'react';
-import { IStateError } from '../type/interfaces';
+import { IStateError } from '../type/interfaces..interface';
 
 export class ErrorBoundary extends Component<
   Record<string, ReactNode>,

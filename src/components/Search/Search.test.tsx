@@ -1,10 +1,10 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MainContext } from '../../pages/MainPage/Main.Page';
-import { IdataProduct } from '../../type/interfaces';
+import { IdataProduct } from '../../type/interfaces..interface';
 import { Search } from './Search';
 
 describe('Search', () => {
-  it('Clicking the Search button saves the entered value to the local storage', () => {
+  it('9.1 Verify that clicking the Search button saves the entered value to the local storage', () => {
     const countPage = 1;
     const countItemData = 1;
     const dataSearch = 'test query';
@@ -53,7 +53,7 @@ describe('Search component', () => {
   beforeEach(() => {
     localStorage.clear();
   });
-  test('Check that the component retrieves the value from the local storage upon mounting', () => {
+  test('9.2 Check that the component retrieves the value from the local storage upon mounting', () => {
     const countPage = 1;
     const countItemData = 1;
     const dataSearch = '';

@@ -2,11 +2,11 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { AllCardMain } from './AllCardMain';
 import { MainContext } from '../../pages/MainPage/Main.Page';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { IdataProduct } from '../../type/interfaces';
+import { IdataProduct } from '../../type/interfaces..interface';
 import { PageProduct } from '../../pages/PageProduct/PageProduct';
 
 describe('AllCardMain component', () => {
-  test('Verify that the component renders the specified number of cards', async () => {
+  test('5.1 Verify that the component renders the specified number of cards', async () => {
     const arrProducts = [
       {
         brand: 'Product 1',
@@ -92,7 +92,7 @@ describe('AllCardMain component', () => {
     expect(cardElements.length).toBe(3);
   });
 
-  test(' Check that an appropriate message is displayed if no cards are present.', () => {
+  test('5.2 Check that an appropriate message is displayed if no cards are present.', () => {
     const arrProducts: IdataProduct[] = [];
     const countPage = 1;
     const countItemData = 1;
@@ -139,7 +139,7 @@ describe('AllCardMain component', () => {
     expect(emptyMessage).toBeInTheDocument();
   });
 
-  test('Validate that clicking on a card opens a detailed card component', () => {
+  test('6.2 Validate that clicking on a card opens a detailed card component', () => {
     const arrProducts = [
       {
         brand: 'Product 1',
