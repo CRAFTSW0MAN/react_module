@@ -1,13 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ApiProduct } from '../../api/Api';
 import { Grogu } from '../../components/Grogu/Grogu';
+import DeleteLogo from '/assets/images/delete.png';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
   IdataCardOneProduct,
   IdataProduct,
-} from '../../type/interfaces..interface';
-import style from './_pageproduct.module.scss';
-import DeleteLogo from '/assets/images/delete.png';
+} from '../../type/interfaces.interface';
+import style from './_pageProduct.module.scss';
 
 export function PageProduct(): JSX.Element {
   const [groguSpinner, setGroguSpinner] = useState<boolean>(true);

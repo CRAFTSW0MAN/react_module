@@ -1,4 +1,4 @@
-import { IdataProduct } from '../../type/interfaces..interface';
+import { IdataProduct } from '../../type/interfaces.interface';
 import style from './_allcard.module.scss';
 import { Link, useLocation } from 'react-router-dom';
 import { CardOfProduct } from '../CardOfProduct/CardOfProduct';

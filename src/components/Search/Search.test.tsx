@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MainContext } from '../../pages/MainPage/Main.Page';
-import { IdataProduct } from '../../type/interfaces..interface';
+import { IdataProduct } from '../../type/interfaces.interface';
 import { Search } from './Search';
 
 describe('Search', () => {

@@ -11,7 +11,6 @@ describe('Header', () => {
     const playButton = screen.getByRole('button', { name: 'Play Music' });
     expect(playButton).toBeInTheDocument();
   });
-
   test('should render the error button', () => {
     render(<Header />);
     const errorButton = screen.getByRole('button', { name: 'Error' });

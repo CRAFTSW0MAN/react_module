@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { AllCardMain } from './AllCardMain';
 import { MainContext } from '../../pages/MainPage/Main.Page';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { IdataProduct } from '../../type/interfaces..interface';
+import { IdataProduct } from '../../type/interfaces.interface';
 import { PageProduct } from '../../pages/PageProduct/PageProduct';
 
 describe('AllCardMain component', () => {

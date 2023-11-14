@@ -1,11 +1,12 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
 import { AllCardMain } from '../../components/AllCardMain/AllCardMain';
-import { IdataProduct } from '../../type/interfaces..interface';
+import { IdataProduct } from '../../type/interfaces.interface';
 import { MainContext } from '../MainPage/Main.Page';
 import { PageProduct } from './PageProduct';
 
 import * as api from '../../api/Api';
+
 
 describe('PageProduct', () => {
   vi.spyOn(api, 'ApiProduct').mockImplementation((): Promise<IdataProduct> => {
@@ -27,6 +28,7 @@ describe('PageProduct', () => {
       }, 1000);
     });
   });
+
   test('7.1.Ensure that the card component renders the relevant card datay', async () => {
     render(
       <BrowserRouter>
@@ -41,6 +43,7 @@ describe('PageProduct', () => {
       expect(screen.queryByTestId('section-grogu')).not.toBeInTheDocument()
     );
   });
+
 
   test('7.2.Make sure the detailed card component correctly displays the detailed card data', async () => {
     const arrProducts = [
@@ -194,8 +197,43 @@ describe('PageProduct', () => {
     const pageProductElement = screen.getByTestId('page-product');
     expect(pageProductElement).toBeInTheDocument();
 
-    const button = screen.findByTestId('DeleteCard');
-    fireEvent.click(await button);
+    const button = await screen.findByTestId('DeleteCard');
+    fireEvent.click( button);
     expect(screen.queryByTestId('page-product')).toBeNull();
   });
+
+
 });
+
+test('6.3 Check that clicking triggers an additional API call to fetch detailed information.', async () => {
+  
+  const mockApiProduct =  vi.spyOn(api, 'ApiProduct').mockImplementation((): Promise<IdataProduct> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          brand: 'Sumsung',
+          category: 'telephone',
+          rating: '4',
+          price: '99.99',
+          stock: '10',
+          discountPercentage: '20',
+          description: 'dwadwd wdawda',
+          images: ['image1.jpg', 'image2.jpg'],
+          title: 'Phone90',
+          id: '2',
+          thumbnail: 'pop',
+        });
+      }, 1000);
+    });
+  });
+
+  render(
+    <MemoryRouter initialEntries={['/product/2']}>
+      <Routes>
+        <Route path="/product/:id" element={<PageProduct />} />
+      </Routes>
+    </MemoryRouter>
+  );
+  expect(mockApiProduct).toHaveBeenCalledWith('2');
+});
+

@@ -1,4 +1,4 @@
-import { IdataProduct } from '../type/interfaces..interface';
+import { IdataProduct } from '../type/interfaces.interface';
 
 export async function ApiService(search: string, limit: number, skip: number) {
   const baseUrl = `https://dummyjson.com/products/`;

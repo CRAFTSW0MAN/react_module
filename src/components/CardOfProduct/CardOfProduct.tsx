@@ -1,4 +1,4 @@
-import { IdataCardProduct } from '../../type/interfaces..interface';
+import { IdataCardProduct } from '../../type/interfaces.interface';
 import style from './_cardOfProduct.module.scss';
 
 export function CardOfProduct(card: IdataCardProduct): JSX.Element {
