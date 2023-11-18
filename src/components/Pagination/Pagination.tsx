@@ -1,25 +1,26 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMainContext } from '../../pages/MainPage/Main.Page';
+import { decrementNumberPage, IdataApi, incrementNumberPage } from '../../store/reducers/apiDataReducer';
 import style from './_pagination.module.scss';
 
 export function Pagination(): JSX.Element {
   const data = useMainContext();
-  const [page, setPage] = useState<number>(
-    data.arrProducts.length ? data.countPage : 1
-  );
-
+  const { numberPage, countLimit} = useSelector((state:IdataApi) => state.apiData);
+  const [page, setPage] = useState(numberPage);
+  const dispatch = useDispatch();
   function handleOnClickPrev() {
     if (page > 1) {
       setPage(page - 1);
-      data.handleUpdatePage(page - 1);
+      dispatch(decrementNumberPage())
     }
   }
   function handleOnClickNext() {
     const countItem = data.arrProducts.length ? data.countItemData : 1;
-    const maxPage = countItem / data.selectedValue;
+    const maxPage = countItem / countLimit;
     if (maxPage > page) {
       setPage(page + 1);
-      data.handleUpdatePage(page + 1);
+      dispatch(incrementNumberPage())
     }
   }
 
