@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface IdataApi {
   apiData: {
@@ -24,7 +24,7 @@ const apiDataReducer = createSlice({
   name: 'apiData',
   initialState,
   reducers: {
-    changeSearchValue(state, action) {
+    changeSearchValue(state, action: PayloadAction<string>) {
       state.searchValue = action.payload;
     },
 
@@ -34,11 +34,11 @@ const apiDataReducer = createSlice({
     decrementNumberPage: (state) => {
       state.numberPage -= 1;
     },
-    chengeNumberPage(state, action) {
+    chengeNumberPage(state, action: PayloadAction<number>) {
       state.numberPage = action.payload;
     },
 
-    chengeCountLimit(state, action) {
+    chengeCountLimit(state, action: PayloadAction<number>) {
       state.countLimit = action.payload;
     },
   },

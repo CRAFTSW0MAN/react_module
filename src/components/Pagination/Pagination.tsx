@@ -1,26 +1,28 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useMainContext } from '../../pages/MainPage/Main.Page';
-import { decrementNumberPage, IdataApi, incrementNumberPage } from '../../store/reducers/apiDataReducer';
+import { IApiCountItem } from '../../store/reducers/apiCountItem';
+import {
+  decrementNumberPage,
+  IdataApi,
+  incrementNumberPage,
+} from '../../store/reducers/apiDataReducer';
 import style from './_pagination.module.scss';
 
 export function Pagination(): JSX.Element {
-  const data = useMainContext();
-  const { numberPage, countLimit} = useSelector((state:IdataApi) => state.apiData);
-  const [page, setPage] = useState(numberPage);
+  const { count } = useSelector((state: IApiCountItem) => state.apiCountItem);
+  const { numberPage, countLimit } = useSelector(
+    (state: IdataApi) => state.apiData
+  );
   const dispatch = useDispatch();
   function handleOnClickPrev() {
-    if (page > 1) {
-      setPage(page - 1);
-      dispatch(decrementNumberPage())
+    if (numberPage > 1) {
+      dispatch(decrementNumberPage());
     }
   }
   function handleOnClickNext() {
-    const countItem = data.arrProducts.length ? data.countItemData : 1;
+    const countItem = count ? count : 1;
     const maxPage = countItem / countLimit;
-    if (maxPage > page) {
-      setPage(page + 1);
-      dispatch(incrementNumberPage())
+    if (maxPage > numberPage) {
+      dispatch(incrementNumberPage());
     }
   }
 
@@ -34,7 +36,7 @@ export function Pagination(): JSX.Element {
         Prev
       </button>
       <div className={style.pagination_page} data-testid="page">
-        {page}
+        {numberPage}
       </div>
       <button
         className={style.pagination_button}
