@@ -16,7 +16,8 @@ import { Pagination } from '../Pagination/Pagination';
 import {
   chengeLoaderAllProducts,
   IloaderAllProducts,
-} from '../../store/reducers/LoaderAllProduct';
+} from '../../store/reducers/loaderAllProduct';
+import { chengeApiCountItem } from '../../store/reducers/apiCountItem';
 
 export function AllCardMain(): JSX.Element {
   const { searchValue, numberPage, countLimit } = useSelector(
@@ -30,6 +31,7 @@ export function AllCardMain(): JSX.Element {
     limit: countLimit,
     skip: numberPage - 1,
   });
+  console.log(data)
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const countPage = Number(searchParams.get('page')) || 1;
@@ -39,15 +41,14 @@ export function AllCardMain(): JSX.Element {
 
   useEffect((): void => {
     dispatch(chengeLoaderAllProducts(isLoading));
-  }, [dispatch, isLoading]);
+    if(data){
+      dispatch(chengeApiCountItem(data.total))
+    }
+  }, [data, dispatch, isLoading]);
 
   useEffect((): void => {
     dispatch(changeSearchValue(search));
   }, [dispatch, search]);
-
-  // useEffect((): void => {
-  //   dispatch(chengeApiCountItem(data.total));
-  // }, [data.total, dispatch]);
 
   useEffect((): void => {
     if (countPage !== 1) {
@@ -67,7 +68,7 @@ export function AllCardMain(): JSX.Element {
   }, [countLimit, numberPage, searchValue, setSearchParams]);
 
   return (
-    <div className={style.main_container}>
+    <div className={style.main_container} data-testid="all-card-main">
       {isLoader ? (
         <div className={style.main_grogu}>
           <Grogu />

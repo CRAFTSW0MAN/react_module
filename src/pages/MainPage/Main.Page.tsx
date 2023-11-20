@@ -7,16 +7,16 @@ import style from './_mainpage.module.scss';
 
 export function MainPage(): JSX.Element {
   return (
-    <>
+    <section data-testid="main">
       <Header />
-      <section className={style.main_option}>
+      <section className={style.main_option} data-testid="main-option">
         <LimitItem />
         <Search />
       </section>
-      <div className={style.main_section}>
+      <div className={style.main_section} data-testid="main-section">
         <AllCardMain />
         <Outlet />
       </div>
-    </>
+    </section>
   );
 }

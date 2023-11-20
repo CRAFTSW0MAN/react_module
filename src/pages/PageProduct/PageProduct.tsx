@@ -1,20 +1,22 @@
 import { useGetDetailsProductQuery } from '../../api/Api';
 import { Grogu } from '../../components/Grogu/Grogu';
 import DeleteLogo from '/assets/images/delete.png';
-import { useCallback, useEffect, useRef} from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import style from './_pageProduct.module.scss';
-import { chengeLoaderDetailsProduct, IloaderDetailsProduct } from '../../store/reducers/loaderProduct';
+import {
+  chengeLoaderDetailsProduct,
+  IloaderDetailsProduct,
+} from '../../store/reducers/loaderProduct';
 import { useDispatch, useSelector } from 'react-redux';
 import { IdataCardOneProduct } from '../../type/interfaces.interface';
 
 export function PageProduct(): JSX.Element {
-  
   const location = useLocation();
-  const { id } = useParams();
+  const {  id = '1' } = useParams();
   const { data, isLoading } = useGetDetailsProductQuery({ id });
-
-  console.log(data,typeof(id));
+  console.log(data, id)
+  const [card, setCard] = useState<IdataCardOneProduct>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoader } = useSelector(
@@ -40,25 +42,20 @@ export function PageProduct(): JSX.Element {
     dispatch(chengeLoaderDetailsProduct(isLoading));
   }, [dispatch, isLoading]);
 
-  // useEffect((): void => {
-  //   setGroguSpinner(true);
-  //   if (id) {
-  //     ApiProduct(id).then((response) => {
-  //       setGroguSpinner(false);
-  //       setDataCard(response);
-  //       const newCard: IdataCardOneProduct = {
-  //         Brand: response.brand,
-  //         Category: response.category,
-  //         Rating: response.rating,
-  //         Price: response.price,
-  //         Stock: response.stock,
-  //         DiscountPercentage: response.discountPercentage,
-  //         Description: response.description,
-  //       };
-  //       setCard(newCard);
-  //     });
-  //   }
-  // }, [id]);
+  useEffect((): void => {
+    if (data) {
+      const newCard: IdataCardOneProduct = {
+        Brand: data.brand,
+        Category: data.category,
+        Rating: data.rating,
+        Price: data.price,
+        Stock: data.stock,
+        DiscountPercentage: data.discountPercentage,
+        Description: data.description,
+      };
+      setCard(newCard);
+    }
+  }, [data]);
 
   return (
     <section className={style.card_product} data-testid="page-product">
@@ -79,7 +76,7 @@ export function PageProduct(): JSX.Element {
               alt="DeleteCard"
             />
           </button>
-          {data ? (
+          {data && card ? (
             <div
               className={style.card_block}
               ref={cardRef}
@@ -97,7 +94,7 @@ export function PageProduct(): JSX.Element {
                 <p className={style.desc_block_title} data-testid="Title">
                   {data.title}
                 </p>
-                {Object.keys(data).map((keyCard) => {
+                {Object.keys(card).map((keyCard) => {
                   return (
                     <div key={keyCard}>
                       {keyCard.charAt(0).toUpperCase() + keyCard.slice(1)}:
@@ -105,7 +102,7 @@ export function PageProduct(): JSX.Element {
                         className={style.desc_block_span}
                         data-testid={keyCard}
                       >
-                        {data[keyCard as keyof IdataCardOneProduct]}
+                        {card[keyCard as keyof IdataCardOneProduct]}
                       </span>
                     </div>
                   );
@@ -113,7 +110,7 @@ export function PageProduct(): JSX.Element {
               </div>
             </div>
           ) : (
-            ''
+            'Product not Found!'
           )}
         </div>
       )}

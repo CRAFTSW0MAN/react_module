@@ -36,7 +36,7 @@ export function Search(): JSX.Element {
   }
 
   return (
-    <form className={style.search} onSubmit={handleSubmit}>
+    <form className={style.search} onSubmit={handleSubmit} data-testid="search">
       <input
         className={style.search_input}
         type="text"

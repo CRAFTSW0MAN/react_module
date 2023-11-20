@@ -11,13 +11,14 @@ export function LimitItem(): JSX.Element {
     dispatch(chengeNumberPage(1));
   };
   return (
-    <div className={style.select_block}>
+    <div className={style.select_block} data-testid="limit">
       <select
         className={style.select}
         name="LimitItem"
         id="limitItem"
         onChange={(e) => handleChangeSelect(e)}
         value={countLimit}
+        data-testid="select"
       >
         <option value="10">10</option>
         <option value="20">20</option>

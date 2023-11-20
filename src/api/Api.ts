@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { IdataProduct } from '../type/interfaces.interface';
 
 export const apiProducts = createApi({
   reducerPath: 'apiProducts',
@@ -9,7 +10,7 @@ export const apiProducts = createApi({
       query: ({ search, limit, skip }) =>
         `search?q=${search}&skip=${limit * skip}&limit=${limit}`,
     }),
-    getDetailsProduct: build.query({
+    getDetailsProduct: build.query<IdataProduct, {id:string}>({
       query: ({id}) => `${String(id)}`,
     }),
   }),
