@@ -1,16 +1,18 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IdataProduct } from '../type/interfaces.interface';
 
-export async function ApiService(search: string, limit: number, skip: number) {
-  const baseUrl = `https://dummyjson.com/products/`;
-  const res: Response = await fetch(
-    `${baseUrl}search?q=${search}&skip=${limit * skip}&limit=${limit}`
-  );
-  return await res.json();
-}
-
-export async function ApiProduct(id: string): Promise<IdataProduct> {
-  const baseUrl = `https://dummyjson.com/products/`;
-  const res: Response = await fetch(`${baseUrl}/${id}`);
-
-  return await res.json();
-}
+export const apiProducts = createApi({
+  reducerPath: 'apiProducts',
+  tagTypes: ['Products'],
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com/products/' }),
+  endpoints: (build) => ({
+    getSearch: build.query({
+      query: ({ search, limit, skip }) =>
+        `search?q=${search}&skip=${limit * skip}&limit=${limit}`,
+    }),
+    getDetailsProduct: build.query<IdataProduct, {id:string}>({
+      query: ({id}) => `${String(id)}`,
+    }),
+  }),
+});
+export const { useGetSearchQuery, useGetDetailsProductQuery } = apiProducts;

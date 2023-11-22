@@ -1,15 +1,29 @@
-.main_allcard {
+.main_container {
   display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   flex-wrap: wrap;
-  .main_empty {
-    min-width: 50vw;
+  min-width: 50vw;
+  .main_allcard {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    font-family: DeathStar;
-    font-size: 3.01rem;
+    flex-wrap: wrap;
+    .main_empty {
+      min-width: 50vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-family: DeathStar;
+      font-size: 3.01rem;
+    }
+  }
+  .main_grogu {
+    display: flex;
+    justify-content: center;
+    min-width: 50vw;
   }
 }

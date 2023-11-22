@@ -35,7 +35,7 @@ export function Header(): JSX.Element {
   }, [hasError]);
 
   return (
-    <header className={style.header}>
+    <header className={style.header} data-testid="header">
       <div className={style.header_logo}>
         <img className={style.logo_img} src={Logo} alt="logo" />
         <div className={style.logo_name}>

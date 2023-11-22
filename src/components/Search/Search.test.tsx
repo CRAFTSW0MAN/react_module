@@ -1,33 +1,17 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { MainContext } from '../../pages/MainPage/Main.Page';
-import { IdataProduct } from '../../type/interfaces.interface';
+import { MemoryRouter } from 'react-router-dom';
+import { StoreProvider } from '../../store/configureStore';
 import { Search } from './Search';
 
 describe('Search', () => {
   it('9.1 Verify that clicking the Search button saves the entered value to the local storage', () => {
-    const countPage = 1;
-    const countItemData = 1;
     const dataSearch = 'test query';
-    const selectedValue = 10;
-    const arrProducts: IdataProduct[] = [];
-    const handleUpdatePage = vi.fn();
-    const handleChangeSelect = vi.fn();
-    const handleUpdateSearch = vi.fn();
     render(
-      <MainContext.Provider
-        value={{
-          countPage,
-          countItemData,
-          dataSearch,
-          selectedValue,
-          arrProducts,
-          handleUpdatePage,
-          handleChangeSelect,
-          handleUpdateSearch,
-        }}
-      >
-        <Search />
-      </MainContext.Provider>
+      <StoreProvider>
+        <MemoryRouter>
+          <Search />
+        </MemoryRouter>
+      </StoreProvider>
     );
     const inputElement = screen.getByPlaceholderText('Search...');
     const searchButton = screen.getByAltText('SearchLogo');
@@ -46,35 +30,18 @@ describe('Search component', () => {
     localStorage.clear();
   });
   test('9.2 Check that the component retrieves the value from the local storage upon mounting', () => {
-    const countPage = 1;
-    const countItemData = 1;
-    const dataSearch = '';
-    const selectedValue = 10;
-    const arrProducts: IdataProduct[] = [];
-    const handleUpdatePage = vi.fn();
-    const handleChangeSelect = vi.fn();
-    const handleUpdateSearch = vi.fn();
 
-    localStorage.setItem('searchQuery', 'test value');
+    localStorage.setItem('searchQuery', 'test query');
 
     render(
-      <MainContext.Provider
-        value={{
-          countPage,
-          countItemData,
-          dataSearch,
-          selectedValue,
-          arrProducts,
-          handleUpdatePage,
-          handleChangeSelect,
-          handleUpdateSearch,
-        }}
-      >
-        <Search />
-      </MainContext.Provider>
+      <StoreProvider>
+        <MemoryRouter>
+          <Search />
+        </MemoryRouter>
+      </StoreProvider>
     );
 
-    expect(screen.getByPlaceholderText('Search...')).toHaveValue('test value');
+    expect(screen.getByPlaceholderText('Search...')).toHaveValue('test query');
     localStorage.removeItem('searchQuery');
   });
 });

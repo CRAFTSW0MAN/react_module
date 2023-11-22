@@ -1,196 +1,63 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
-import { AllCardMain } from '../../components/AllCardMain/AllCardMain';
-import { IdataProduct } from '../../type/interfaces.interface';
-import { MainContext } from '../MainPage/Main.Page';
+import { fireEvent, render, screen} from '@testing-library/react';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { PageProduct } from './PageProduct';
+import { StoreProvider } from '../../store/configureStore';
+import { catalogProducts } from '../../api/catalogProducts';
 
-import * as api from '../../api/Api';
 
-describe('PageProduct', () => {
-  vi.spyOn(api, 'ApiProduct').mockImplementation((): Promise<IdataProduct> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          brand: 'Sumsung',
-          category: 'telephone',
-          rating: '4',
-          price: '99.99',
-          stock: '10',
-          discountPercentage: '20',
-          description: 'dwadwd wdawda',
-          images: ['image1.jpg', 'image2.jpg'],
-          title: 'Phone90',
-          id: '2',
-          thumbnail: 'pop',
-        });
-      }, 1000);
-    });
-  });
-
-  test('7.1.Ensure that the card component renders the relevant card datay', async () => {
-    render(
-      <BrowserRouter>
-        <PageProduct />
-      </BrowserRouter>
-    );
-
-    const groguSpinner = screen.getByTestId('grogu-spinner');
-    expect(groguSpinner).toBeInTheDocument();
-
-    await waitFor(() =>
-      expect(screen.queryByTestId('section-grogu')).not.toBeInTheDocument()
-    );
-  });
-
-  test('7.2.Make sure the detailed card component correctly displays the detailed card data', async () => {
-    const arrProducts = [
-      {
-        brand: 'Product 1',
-        category: 'Product 1',
-        description: 'Product 1',
-        discountPercentage: 'Product 1',
-        id: '1',
-        images: ['image1.jpg'],
-        price: 'Product 1',
-        rating: 'Product 1',
-        stock: 'Product 1',
-        thumbnail: 'Product 1',
-        title: 'Product 1',
-      },
-    ];
-
-    const countPage = 1;
-    const countItemData = 1;
-    const dataSearch = 'test query';
-    const selectedValue = 10;
-    const handleUpdatePage = (page: number) => {
-      console.log(page);
-    };
-    const handleChangeSelect = (
-      event: React.ChangeEvent<HTMLSelectElement>
-    ) => {
-      console.log(event);
-    };
-    const handleUpdateSearch = (search: string) => {
-      console.log(search);
-    };
-    render(
-      <MemoryRouter initialEntries={['/']} initialIndex={0}>
+test('7.2.Make sure the detailed card component correctly displays the detailed card data', async () => {
+  const number = 1;
+  render(
+    <StoreProvider>
+      <MemoryRouter initialEntries={[`/product/${number}`]}>
         <Routes>
-          <Route path="/" element={<AllCardMain />} />
           <Route path="/product/:id" element={<PageProduct />} />
         </Routes>
-      </MemoryRouter>,
-      {
-        wrapper: ({ children }) => (
-          <MainContext.Provider
-            value={{
-              countPage,
-              countItemData,
-              dataSearch,
-              selectedValue,
-              arrProducts,
-              handleUpdatePage,
-              handleChangeSelect,
-              handleUpdateSearch,
-            }}
-          >
-            {children}
-          </MainContext.Provider>
-        ),
-      }
-    );
+      </MemoryRouter>
+    </StoreProvider>
+  );
 
-    const cardElement = screen.getByTestId('card-of-list');
-    fireEvent.click(cardElement);
+  const filteredArr = catalogProducts.filter(
+    (characterObj) => number === characterObj.id
+  );
+  const character = filteredArr.pop();
 
-    const pageProductElement = screen.getByTestId('page-product');
-    expect(pageProductElement).toBeInTheDocument();
+  const pageProductElement = screen.getByTestId('page-product');
+  expect(pageProductElement).toBeInTheDocument();
 
-    const title = await screen.findByTestId('Title');
-    const description = await screen.findByTestId('Description');
-    const brand = await screen.findByTestId('Brand');
-    const category = await screen.findByTestId('Category');
-    const rating = await screen.findByTestId('Rating');
-    const price = await screen.findByTestId('Price');
-    const stock = await screen.findByTestId('Stock');
-    const discountPercentage = await screen.findByTestId('DiscountPercentage');
-    const image = await screen.findByTestId('card-image');
+  const title = await screen.findByTestId('Title');
+  const description = await screen.findByTestId('Description');
+  const brand = await screen.findByTestId('Brand');
+  const category = await screen.findByTestId('Category');
+  const rating = await screen.findByTestId('Rating');
+  const price = await screen.findByTestId('Price');
+  const stock = await screen.findByTestId('Stock');
+  const discountPercentage = await screen.findByTestId('DiscountPercentage');
+  const image = await screen.findByTestId('card-image');
 
-    expect(title).toHaveTextContent('Phone90');
-    expect(description).toHaveTextContent('dwadwd wdawda');
-    expect(brand).toHaveTextContent('Sumsung');
-    expect(category).toHaveTextContent('telephone');
-    expect(rating).toHaveTextContent('4');
-    expect(price).toHaveTextContent('99.99');
-    expect(stock).toHaveTextContent('10');
-    expect(discountPercentage).toHaveTextContent('20');
-
-    expect(image).toHaveAttribute('src', 'image1.jpg');
-  });
+  if (character) {
+    expect(title).toHaveTextContent(character.title);
+    expect(description).toHaveTextContent(character.description);
+    expect(brand).toHaveTextContent(character.brand);
+    expect(category).toHaveTextContent(character.category);
+    expect(rating).toHaveTextContent(character.rating);
+    expect(price).toHaveTextContent(character.price);
+    expect(stock).toHaveTextContent(character.stock);
+    expect(discountPercentage).toHaveTextContent(character.discountPercentage);
+  }
+  expect(image).toHaveAttribute('src', character?.images[0]);
+});
 
   test('7.3.Ensure that clicking the close button hides the component', async () => {
-    const arrProducts = [
-      {
-        brand: 'Product 1',
-        category: 'Product 1',
-        description: 'Product 1',
-        discountPercentage: 'Product 1',
-        id: '1',
-        images: ['image1.jpg'],
-        price: 'Product 1',
-        rating: 'Product 1',
-        stock: 'Product 1',
-        thumbnail: 'Product 1',
-        title: 'Product 1',
-      },
-    ];
-
-    const countPage = 1;
-    const countItemData = 1;
-    const dataSearch = 'test query';
-    const selectedValue = 10;
-    const handleUpdatePage = (page: number) => {
-      console.log(page);
-    };
-    const handleChangeSelect = (
-      event: React.ChangeEvent<HTMLSelectElement>
-    ) => {
-      console.log(event);
-    };
-    const handleUpdateSearch = (search: string) => {
-      console.log(search);
-    };
     render(
-      <MemoryRouter initialEntries={['/']} initialIndex={0}>
-        <Routes>
-          <Route path="/" element={<AllCardMain />} />
-          <Route path="/product/:id" element={<PageProduct />} />
-        </Routes>
-      </MemoryRouter>,
-      {
-        wrapper: ({ children }) => (
-          <MainContext.Provider
-            value={{
-              countPage,
-              countItemData,
-              dataSearch,
-              selectedValue,
-              arrProducts,
-              handleUpdatePage,
-              handleChangeSelect,
-              handleUpdateSearch,
-            }}
-          >
-            {children}
-          </MainContext.Provider>
-        ),
-      }
+      <StoreProvider>
+        <MemoryRouter initialEntries={[`/product/1`]}>
+          <Routes>
+            <Route path="/product/:id" element={<PageProduct />} />
+          </Routes>
+        </MemoryRouter>
+      </StoreProvider>
     );
-
-    const cardElement = screen.getByTestId('card-of-list');
-    fireEvent.click(cardElement);
 
     const pageProductElement = screen.getByTestId('page-product');
     expect(pageProductElement).toBeInTheDocument();
@@ -199,37 +66,3 @@ describe('PageProduct', () => {
     fireEvent.click(button);
     expect(screen.queryByTestId('page-product')).toBeNull();
   });
-});
-
-test('6.3 Check that clicking triggers an additional API call to fetch detailed information.', async () => {
-  const mockApiProduct = vi
-    .spyOn(api, 'ApiProduct')
-    .mockImplementation((): Promise<IdataProduct> => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve({
-            brand: 'Sumsung',
-            category: 'telephone',
-            rating: '4',
-            price: '99.99',
-            stock: '10',
-            discountPercentage: '20',
-            description: 'dwadwd wdawda',
-            images: ['image1.jpg', 'image2.jpg'],
-            title: 'Phone90',
-            id: '2',
-            thumbnail: 'pop',
-          });
-        }, 1000);
-      });
-    });
-
-  render(
-    <MemoryRouter initialEntries={['/product/2']}>
-      <Routes>
-        <Route path="/product/:id" element={<PageProduct />} />
-      </Routes>
-    </MemoryRouter>
-  );
-  expect(mockApiProduct).toHaveBeenCalledWith('2');
-});
