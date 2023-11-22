@@ -1,7 +1,7 @@
 import style from './_grogu.module.scss';
 export function Grogu(): JSX.Element {
   return (
-    <div className={style.container}>
+    <div className={style.container} data-testid="grogu-spinner">
       <div className={style.suns}></div>
       <div className={style.egg_back}></div>
       <div className={style.grogu}>

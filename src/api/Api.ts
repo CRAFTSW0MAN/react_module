@@ -1,23 +1,16 @@
-export function ApiService(search: string, limit: number, skip: number) {
-  const baseUrl = `https://dummyjson.com/products/`;
-  async function getAllPlanets(search: string, limit: number, skip: number) {
-    const res: Response = await fetch(
-      `${baseUrl}search?q=${search}&skip=${limit * skip}&limit=${limit}`
-    );
-    const json = await res.json();
-    return json;
-  }
+import { IdataProduct } from '../type/interfaces.interface';
 
-  return getAllPlanets(search, limit, skip);
+export async function ApiService(search: string, limit: number, skip: number) {
+  const baseUrl = `https://dummyjson.com/products/`;
+  const res: Response = await fetch(
+    `${baseUrl}search?q=${search}&skip=${limit * skip}&limit=${limit}`
+  );
+  return await res.json();
 }
 
-export function ApiProduct(id: string) {
+export async function ApiProduct(id: string): Promise<IdataProduct> {
   const baseUrl = `https://dummyjson.com/products/`;
-  async function getAllPlanets() {
-    const res: Response = await fetch(`${baseUrl}/${id}`);
-    const json = await res.json();
-    return json;
-  }
+  const res: Response = await fetch(`${baseUrl}/${id}`);
 
-  return getAllPlanets();
+  return await res.json();
 }

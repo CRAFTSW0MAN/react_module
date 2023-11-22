@@ -1,31 +1,32 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from 'react-router-dom';
-import { RootLayout } from '../components/Loyout/Loyout';
-import { MainPage } from '../pages/MainPage/MainPage';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import ErrorPage from '../pages/ErrorPage/ErrorPage';
+import { MainPage } from '../pages/MainPage/Main.Page';
+import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
+import { PageProduct } from '../pages/PageProduct/PageProduct';
 
-import { PagePeople } from '../pages/PagePeople/PagePeople';
-import { PagePeopleStart } from '../pages/PagePeople/PagePeopleStart';
 import style from './_app.module.scss';
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<RootLayout />}>
-      <Route path="/" element={<MainPage />}>
-        <Route path="/:params/" element={<PagePeopleStart />} />
-        <Route path="/:params/:id" element={<PagePeople />} />
-      </Route>
-      <Route path="/:params/" element={<MainPage />} />
-    </Route>
-  )
-);
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <MainPage />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: '/product/:id',
+        element: <PageProduct />,
+      },
+    ],
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
+  },
+]);
 
 export function App() {
   return (
-    <section className={style.container}>
+    <section className={style.container} data-testid="app">
       <RouterProvider router={router} />
     </section>
   );
