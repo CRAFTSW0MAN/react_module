@@ -1,71 +1,62 @@
-import { ChangeEvent, Component, ReactNode } from 'react';
+import { ChangeEvent, useState } from 'react';
 import SearchLogo from '/assets/images/search.png';
 import DeleteLogo from '/assets/images/delete.png';
 import style from './_search.module.scss';
-import { IStateSearch } from '../../type/interfaces';
-export class Search extends Component<{
-  upDate: (dataSearch: string) => void;
-  upDateSearch: (search: string) => void;
-}> {
-  inputValueSearch = localStorage.getItem('searchQuery');
-  state: IStateSearch = {
-    search: this.inputValueSearch ? this.inputValueSearch : '',
-  };
 
-  private OnChangeInput(e: ChangeEvent<HTMLInputElement>): void {
-    this.setState({
-      search: e.target.value,
-    });
+type UpdateSearchFunction = (search: string) => void;
+
+interface ISearchProps {
+  handleUpdateSearch: UpdateSearchFunction;
+}
+
+export function Search({ handleUpdateSearch }: ISearchProps): JSX.Element {
+  const inputValueSearch = localStorage.getItem('searchQuery');
+  const [search, setSearch] = useState(
+    inputValueSearch ? inputValueSearch : ''
+  );
+
+  function handleOnChangeInput(e: ChangeEvent<HTMLInputElement>): void {
+    setSearch(e.target.value);
   }
-  private OnClickButtonSearch(): void {
-    localStorage.setItem('searchQuery', this.state.search);
-    console.log(this.state.search);
-    this.props.upDate(this.state.search);
-    this.props.upDateSearch(this.state.search);
-  }
-  private OnClickButtonDelete(): void {
-    localStorage.setItem('searchQuery', '');
-    this.setState({
-      search: '',
-    });
+
+  function handleOnClickButtonDelete(): void {
     const emptyString = '';
-    this.props.upDate(emptyString);
-    this.props.upDateSearch(emptyString);
+    setSearch(emptyString);
+    handleUpdateSearch(emptyString);
   }
-  public render(): ReactNode {
-    return (
-      <div className={style.search}>
-        <input
-          className={style.search_input}
-          type="text"
-          placeholder="Search..."
-          onChange={(e): void => {
-            this.OnChangeInput(e);
-          }}
-          value={this.state.search}
-          autoFocus={true}
+
+  return (
+    <div className={style.search}>
+      <input
+        className={style.search_input}
+        type="text"
+        placeholder="Search..."
+        autoFocus={true}
+        onChange={(e): void => {
+          handleOnChangeInput(e);
+        }}
+        value={search}
+      />
+      <button
+        className={style.search_button}
+        onClick={() => handleUpdateSearch(search)}
+      >
+        <img
+          className={style.search_button_img}
+          src={SearchLogo}
+          alt="SearchLogo"
         />
-        <button
-          className={style.search_button}
-          onClick={() => this.OnClickButtonSearch()}
-        >
-          <img
-            className={style.search_button_img}
-            src={SearchLogo}
-            alt="SearchLogo"
-          />
-        </button>
-        <button
-          className={style.search_button}
-          onClick={() => this.OnClickButtonDelete()}
-        >
-          <img
-            className={style.search_button_img}
-            src={DeleteLogo}
-            alt="DeleteLogo"
-          />
-        </button>
-      </div>
-    );
-  }
+      </button>
+      <button
+        className={style.search_button}
+        onClick={handleOnClickButtonDelete}
+      >
+        <img
+          className={style.search_button_img}
+          src={DeleteLogo}
+          alt="DeleteLogo"
+        />
+      </button>
+    </div>
+  );
 }

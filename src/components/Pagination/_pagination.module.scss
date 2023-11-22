@@ -1,0 +1,22 @@
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem auto;
+  max-width: 30%;
+  font-family: DeathStar;
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+  padding-bottom: 1rem;
+
+  &_button {
+    height: 3rem;
+    border: 2px solid #ebd71c;
+    color: #ebd71c;
+    font-weight: bold;
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.5rem;
+  }
+}
